@@ -1,0 +1,1261 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    
+ </head>
+ <style>
+    :root {
+  --gradient-blue: linear-gradient(to right, #1e3c72, #2a5298);
+  --gradient-pink: linear-gradient(to right, #ff758c, #ff7eb3);
+  --gradient-k: #CCCCFF;
+  --gradient-orange: linear-gradient(to right, #ff6a00, #ee0979);
+  --brand-orange: #ff6a00;
+  --brand-orange-dark: #e65c00;
+  --brand-black: #222;
+  --brand-gray: #f5f5f5;
+    }
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+       font-family: Inter, Roboto, sans-serif;
+       font-size: 16px; 
+        
+    }
+    .header{
+        width: 100%;
+        display: flex;
+        padding: 30px 0;
+        justify-content: center;
+        gap: 30px;
+        background-color: #666633;
+    }
+    .header_logo {
+        display: flex;
+        align-items: center;
+        margin-left: 50px;
+        color: #fff;
+    }
+    .header_list {
+        border-radius: 5px;
+        background-color: rgba(247, 246, 246, 0.3);
+        padding: 8px 10px;
+        display: flex;
+        color: #fff;
+        align-items: center;
+    }
+    .header_list:hover {
+        background-color: #4b4b0b;
+    }
+    i {
+       font-size: 20px;  
+       color: black;
+    }
+     .header_location {
+        border-radius: 5px;
+        background-color: rgba(247, 246, 246, 0.3);
+        padding: 8px 10px;
+        display: flex;
+        color: #fff;
+        align-items: center;
+    }
+    .header_location:hover {
+        background-color: #4b4b0b;
+    }
+
+    .header_search {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 8px 120px 8px 0; 
+        display: flex;
+        align-items: center;  
+    }
+     .header_search input {
+        border: none;
+        outline: none;
+        background: transparent;
+        padding-left: 10px;
+        font-size: 16px;
+        width: 250px;
+        color: #fff;
+      }
+
+      .header_search i {
+        color: black;
+        margin-left: 10px;
+        font-size: 20px;
+      }
+
+      .header_search:hover {
+        background-color: #f5f5f5;
+        cursor: text;
+      }
+
+    .header_cart {
+      position: relative;
+      font-size: 16px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+    }
+
+  .header_cart .badge {
+    position: absolute;
+    top: -8px;      /* vị trí badge so với icon */
+    right: -8px;
+    background: red;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 18px;
+    min-height: 18px;
+  }
+
+  .cart-section-title {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cart-address-options label {
+    display: block;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.cart-new-address {
+    display: none;
+    margin-top: 10px;
+}
+
+.cart-new-address input {
+    display: block;
+    width: 100%;
+    padding: 6px 8px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Thanh toán */
+.cart-payment {
+    width: 100%;
+    padding: 6px 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Nút xác nhận */
+.cart-checkout {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cart-checkout:hover {
+    background-color: #218838;
+}
+
+    .cart_btn {
+       display: flex;
+       justify-content: center;
+      margin: 7px 0 0 0;
+
+    }
+    .cart_btn button {
+      padding: 5px 5%;
+      border-radius: 5px;
+      background-color: #d03345;
+      color: #fff;
+    }
+    .cart_btn button:hover {
+      cursor: pointer;
+      background-color: #d0cfcf;
+    }
+    .header_cart:hover {
+        background-color: #4b4b0b;
+    }
+    .header_login {
+      color: #fff;
+        border-radius: 5px;
+        background-color: rgba(247, 246, 246, 0.3);
+        padding: 8px 10px;
+        display: flex;
+        align-items: center;
+    }
+     .header_login:hover {
+        background-color: #4b4b0b;
+    }
+    .header_list_menu {
+        position: absolute;
+        top: 100px;
+        left: 50px;
+        background-color: #fff;
+        color: black;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        padding: 10px 20px;
+        display: none;
+        z-index: 1000;
+         
+    }
+    .header_list_menu i{
+        color: rgba(0,0,0,0.2);
+        font-size: 20px;
+    }
+    .header_list_menu ul{
+        list-style: none;
+    }
+    .header_list_menu li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 19px;
+        gap: 10px;
+        cursor: pointer;
+    }
+    .header_list_menu li:hover {
+         background-color: #eee;
+         color: #666633;
+    }
+    .header_list_menu a {
+        text-decoration: none;
+        color: black;
+    }
+     .header_login_register {
+        position: absolute; 
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        color: black;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        padding: 15px 20px;
+        display: none;
+        height: 200px;
+        width: 320px;
+        z-index: 1000;
+         
+    }
+
+    .header_login_register_title {
+        text-align: center;
+        font-size: 25px;
+        color: #666633;
+        font-weight: 600;
+    }
+
+    .header_login_register_message {
+        font-size: 18px;
+        text-align: center;
+        margin: 20px 0 0 0;
+    }
+
+    .header_login_register_action {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 45px 0 0 0;
+    }
+
+    .header_login_register_re {
+        border: 3px solid #7f7f3f;
+        padding: 8px 12px;
+        color: #666633;
+        border-radius: 5px;
+    }
+    .header_login_register_re a {
+        text-decoration: none;
+        color: #666633;
+        font-weight: bold;
+    }
+    .header_login_register_re:hover {
+        transform: scale(1.1);
+        transition: all 0.7s ease;
+    }
+
+    .header_login_register_log {
+        border: 3px solid #7f7f3f;
+        padding: 8px 12px;
+        background-color: #7f7f3f;
+        color: #fff;
+        border-radius: 5px;
+    }
+    .header_login_register_log a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+    }
+    .header_login_register_log:hover {
+        transform: scale(1.1);
+        transition: all 0.7s ease;
+    }
+    .hero {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    }
+
+    .hero-slider {
+    position: relative;
+    }
+
+    
+    .slide {
+    display: none;
+    height: 500px;
+    padding: 60px 0;
+    background: var(--brand-gray);
+    color: var(--brand-black);
+    }
+
+    .slide.active {
+    display: block;
+    animation: fadeIn 1s ease;
+    }
+
+    
+    .slide[data-bg="gradient-blue"] {
+    background: var(--gradient-blue);
+    color: white;
+    }
+
+    .slide[data-bg="gradient-pink"] {
+    background: var(--gradient-pink);
+    color: white;
+    }
+
+    .slide[data-bg="gradient-orange"] {
+    background: var(--gradient-orange);
+    color: white;
+    }
+
+    
+    .hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 400px;
+    padding: 0 5%;
+    }
+
+    .hero-text {
+    flex: 1;
+    max-width: 50%;
+    }
+
+    .hero-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    }
+
+     
+    .rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    }
+
+    .stars {
+    display: flex;
+    gap: 4px;
+    color: #fbbf24;
+    }
+
+    .rating span {
+    font-size: 14px;
+    opacity: 0.8;
+    }
+
+         
+    .hero-text h1 {
+    font-size: 2.5rem;        
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    }
+
+    .hero-text h2 {
+    font-size: 1.125rem;     
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--brand-orange);
+    }
+
+    .slide[data-bg="gradient-blue"] .hero-text h2,
+    .slide[data-bg="gradient-pink"] .hero-text h2,
+    .slide[data-bg="gradient-orange"] .hero-text h2 {
+    color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-text p {
+    font-size: 1rem;          
+    max-width: 450px;
+    margin-bottom: 24px;     
+    opacity: 0.85;
+    }
+
+    
+    .rating span {
+    font-size: 13px;          
+    opacity: 0.75;
+    }
+
+     
+    .btn-primary,
+    .btn-outline {
+    padding: 12px 24px;      
+    font-size: 0.875rem; 
+    }
+        
+    .btn-primary {
+    background: var(--brand-orange);
+    color: white;
+    border: none;
+    }
+
+    .btn-primary:hover {
+    background: var(--brand-orange-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+    }
+
+    /* Outline Button */
+    .btn-outline {
+    background: transparent;
+    color: var(--brand-black);
+    border: 2px solid var(--brand-black);
+    }
+
+    .btn-outline:hover {
+    background: var(--brand-black);
+    color: white;
+    }
+
+    /* Outline Button on Gradient Slides */
+    .slide[data-bg="gradient-blue"] .btn-outline,
+    .slide[data-bg="gradient-pink"] .btn-outline,
+    .slide[data-bg="gradient-orange"] .btn-outline {
+    color: white;
+    border-color: white;
+    }
+
+    .slide[data-bg="gradient-blue"] .btn-outline:hover,
+    .slide[data-bg="gradient-pink"] .btn-outline:hover,
+    .slide[data-bg="gradient-orange"] .btn-outline:hover {
+    background: white;
+    color: var(--brand-black);
+    }
+
+    .sidebar{
+        width: 100%;
+        color: black;
+        display: flex;
+        padding: 15px 0;
+    }
+    .sidebar__logo-wrapper{
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;  
+    }
+    
+    .sidebar__logo img {
+        border-radius: 10px;
+        margin: 15px 0;
+    }
+    .sidebar__logo:hover {
+        cursor: pointer;
+    }
+    .sidebar__menu{
+        width: 75%;
+        background-color: rgb(227, 227, 227); 
+        margin: 15px 0; 
+    }
+       
+    .sidebar__menu-list{
+        display: flex;
+        list-style: none;
+        gap: 15px;
+        margin: 15px 10px;
+        margin: 10px 0;
+    }
+    .sidebar__menu-item {
+        margin: 10px 0;
+        border-radius: 30px;
+        border: 1px solid black;
+        padding: 8px 10px;
+        display: flex;
+        
+    }
+    .sidebar__menu-item img {
+        width: 20%;
+    }
+    .sidebar__menu-item:hover {
+        background-color:#d0cfcf ;
+    }
+    .sidebar__menu-item:hover{
+        cursor: pointer;
+    }
+    .sidebar__menu-title {
+        font-size: 20px;
+        color: black;
+        font-weight: bolder;
+        text-align: center;
+        border-bottom: 1px solid black;
+        padding: 15px 0;
+        background-color: #d2d0d0;
+    }
+    .sidebar__menu-title:hover{
+        color: red;
+        cursor: pointer;
+        border-bottom: 1px solid red;
+        background-color: rgb(203, 128, 143);
+    }
+
+    .card_wrap {
+      width: 90%;              
+      padding: 10px;
+      margin-left: auto;       
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    .card_container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: flex-start;  
+    }
+
+    .card {
+      flex: 0 0 300px;    
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;  
+    }
+
+    .card_img img{
+      width:100%;
+      border-radius:8px;
+      object-fit:cover;
+    }
+    .card_img img:hover{
+      transform:scale(1.02);
+      transition:all 0.5s ease;
+    }
+    .card_info{
+      margin-top:8px;
+    }
+     
+    .card_name{
+      font-weight:bold;
+      font-size:20px;
+      margin: 10px 0;
+    }
+    .card_new{
+      background-color:#dff9e8;
+      color:#60896f;
+      border-radius:5px;
+      padding:3px;
+      margin:4px 0;
+    }
+    .crad_price{
+      color:#d03345;
+      font-size:23px;
+      font-weight:bolder;
+    }
+    .crad_sale{
+      background-color:#dbe8fe;
+      color:#5072a8;
+      font-size:14px;
+      font-weight:bold;
+      padding:3px;
+      border-radius:5px;
+    }
+    .card_evaluate{
+      display:flex;
+      justify-content:space-between;
+      margin-top:5px;
+    }
+    .crad_rating{
+      font-weight:bold;
+    }
+    .card_like i{
+      color:#98bbf7;
+    }
+
+
+    /* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 16px;
+    max-height: 80vh;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--brand-gray-light);
+}
+
+.modal-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.modal-close:hover {
+    background: var(--brand-gray);
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.empty-cart {
+    text-align: center;
+    color: var(--brand-gray-dark);
+    padding: 40px 20px;
+}
+
+.modal-footer {
+    padding: 20px;
+    border-top: 1px solid var(--brand-gray-light);
+}
+
+.cart-total {
+    margin-bottom: 16px;
+    text-align: right;
+    font-size: 1.125rem;
+}
+
+.btn-checkout {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+}
+
+
+
+    @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+    }
+
+
+
+ </style>
+ <body>
+    <div class="header">
+        <div class="header_logo">LOGO</div>
+            <div class="header_list">
+                <i class='bxr  bx-list-ul'  ></i> 
+                Danh mục
+                <i class='bxr  bx-chevron-down'  ></i> 
+            </div>
+            <div class="header_location">
+                <i class='bxr  bx-location-alt'  ></i> 
+                Địa chỉ
+                <i class='bxr  bx-chevron-down'  ></i> 
+            </div>
+            <div class="header_search">
+                <i class='bx bx-search'></i>
+                <input type="text" id="searchInput" placeholder="Bạn muốn mua gì?">
+            </div>
+            <div class="header_cart">
+                Giỏ hàng
+                <i class='bxr  bx-cart'  ></i> 
+                <span class="badge" id="cartCount">0</span>
+            </div>
+            <div class="header_login">
+                Đăng nhập
+                <i class='bxr  bx-user'  ></i> 
+            </div>
+        </div>
+    </div>
+ 
+   <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Giỏ hàng của bạn</h3>
+                <button class="modal-close" id="closeCartModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems">
+                    <p class="empty-cart">Giỏ hàng của bạn đang trống</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="cart-total">
+                  <strong>Tổng cộng: <span id="cartTotal">0₫</span></strong>
+                </div>
+                <button class="btn-primary btn-checkout">THANH TOÁN</button>
+            </div>
+             <!-- Địa chỉ giao hàng -->
+        <h3 class="cart-section-title">Địa chỉ giao hàng</h3>
+        <div class="cart-address-options">
+            <label>
+                <input type="radio" name="addressOption" value="account" checked> Sử dụng địa chỉ từ tài khoản
+            </label>
+            <label>
+                <input type="radio" name="addressOption" value="new"> Nhập địa chỉ mới
+            </label>
+        </div>
+        <div id="newAddressFields" class="cart-new-address">
+            <input type="text" id="recipientName" placeholder="Họ và tên">
+            <input type="text" id="recipientPhone" placeholder="Số điện thoại">
+            <input type="text" id="recipientAddress" placeholder="Địa chỉ">
+        </div>
+
+        <!-- Phương thức thanh toán -->
+        <h3 class="cart-section-title">Phương thức thanh toán</h3>
+        <select id="paymentMethod" class="cart-payment">
+            <option value="cod" selected>Tiền mặt khi nhận hàng</option>
+            <option value="bank">Chuyển khoản</option>
+            <option value="online">Thanh toán trực tuyến</option>
+        </select>
+
+        <button id="checkoutBtn" class="cart-checkout">Xác nhận đơn hàng</button>
+    </div>
+        </div>
+    </div>
+<!--menu danh sach-->
+<div class="header_list_menu" id="header_list_menu">
+    <ul>
+        <li><a href="iphonecard.html">Apple</a> <i class='bxr  bx-chevron-right'  ></i> </li>
+        <li><a href="samsungcard.html">Samsung </a> <i class='bxr  bx-chevron-right'  ></i> </li>
+        <li>Oppo <i class='bxr  bx-chevron-right'  ></i> </li>
+        <li>Xiaomi <i class='bxr  bx-chevron-right'  ></i> </li>
+        <li>Huawei <i class='bxr  bx-chevron-right'  ></i> </li>
+        <li>Vivo <i class='bxr  bx-chevron-right'  ></i> </li>
+        <li>Realme <i class='bxr  bx-chevron-right'  ></i> </li>
+    </ul>
+</div>
+
+<!--dang nhap-->
+<div class="header_login_register" id="header_login_register">
+    <div class="header_login_register_title">LOGIN</div>
+    <div class="header_login_register_message">Vui lòng đăng nhập để xem thông tin !!!</div>
+    <div class="header_login_register_action">
+        <div class="header_login_register_re"><a href="dangky.html">Đăng kí</a></div>
+        <div class="header_login_register_log"> <a href="login1.html">Đăng nhập</a></div>
+    </div>
+</div>
+
+
+<!--banner-->
+<section class="hero">
+  <div class="hero-slider">
+    <div class="slide active" data-bg="gradient-blue">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="rating">
+            <div class="stars">★★★★★</div>
+            <span>4.9/5 đánh giá</span>
+          </div>
+          <h1>Khám phá iPhone 17 Pro</h1>
+          <h2>Hiệu năng vượt trội</h2>
+          <p>Trải nghiệm công nghệ đỉnh cao với thiết kế sang trọng và camera AI thông minh.</p>
+          <div class="hero-buttons">
+            <button class="btn-primary">Mua ngay</button>
+            <button class="btn-outline">Tìm hiểu thêm</button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:1036:450/q:90/plain/https://dashboard.cellphones.com.vn/storage/690x300_iPhone_17_Pro_Opensale_v3.png" alt="iPhone 17 Pro">
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" data-bg="gradient-pink">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="rating">
+            <div class="stars">★★★★★</div>
+            <span>5.0/5 đánh giá</span>
+          </div>
+          <h1>Galaxy S25 Ultra</h1>
+          <h2>Google AI tích hợp</h2>
+          <p>Camera zoom 200x, pin siêu bền và AI hỗ trợ mọi thao tác.</p>
+          <div class="hero-buttons">
+            <button class="btn-primary">Khám phá</button>
+            <button class="btn-outline">Chi tiết</button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://cdn.tgdd.vn/Products/Images/42/333347/Slider/vi-vn-samsung-galaxy-s25-ultra-google-ai-pro.jpg" alt="Galaxy S25 Ultra">
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" data-bg="gradient-k">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="rating">
+            <div class="stars">★★★★★</div>
+            <span>5.0/5 đánh giá</span>
+          </div>
+          <h1>Xiaomi 15 Ultra</h1>
+          <h2>Camera LEICA đỉnh cao</h2>
+          <p>Trang bị Snapdragon® 8 Elite, màn hình WQHD+ siêu sáng 3200 nit, RAM lên đến 16GB và bộ nhớ 1TB. Thiết kế lấy cảm hứng từ máy ảnh Leica, mang đến trải nghiệm nhiếp ảnh chuyên nghiệp ngay trên smartphone.</p>
+          <div class="hero-buttons">
+            <button class="btn-primary">Khám phá</button>
+            <button class="btn-outline">Chi tiết</button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/15a7b269-53a2-4fe4-8da3-48d013a2d553.__CR0,0,970,600_PT0_SX970_V1___.jpg" alt="Galaxy S25 Ultra">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sidebar">
+    <div class="sidebar__logo-wrapper"> 
+    <div class="sidebar__logo">
+        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:214:530/q:90/plain/https://media-asset.cellphones.com.vn/page_configs/01K6F050R8WY7PZK75J36ST4CV.png" alt="">
+    </div>
+     <div class="sidebar__logo">
+        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:214:530/q:90/plain/https://media-asset.cellphones.com.vn/page_configs/01K7EHA6JK5P0M1X61ENXTE983.png" alt="">
+    </div>
+    </div>
+    <div class="sidebar__menu">
+        <div class="sidebar__menu-title">ĐIỆN THOẠI</div>
+        <div class="sidebar_menu_listt"> 
+            <ul class="sidebar__menu-list sidebar__menu-list--feature">
+                <li class="sidebar__menu-item">
+                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/icon/mobile-gamning.png" alt="">
+                    Điện thoại chơi game
+                </li>
+                <li class="sidebar__menu-item">
+                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/icon/mobile-pin.png" alt="">
+                    Điện thoại pin trâu
+                </li>
+                <li class="sidebar__menu-item">
+                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/icon/mobile-5g_1.png" alt="">
+                    Điện thoại 5G
+                </li>
+                <li class="sidebar__menu-item">
+                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/icon/mobile-chup-anh.png" alt="">
+                    Điện thoại chụp hình đẹp
+                </li>
+                <li class="sidebar__menu-item">
+                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/icon/mobile-gap_1.png" alt="">
+                    Điện thoại gập
+                </li>
+                <li class="sidebar__menu-item">
+                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/dien-thoai-ai-icon-cate.png" alt="">
+                    Điện thoại AI
+                </li>
+            </ul>
+        </div>
+        <div class="sidebar_menu_listt"> 
+            <ul class="sidebar__menu-list sidebar__menu-list--brand">
+                <li class="sidebar__menu-item">Apple</li>
+                <li class="sidebar__menu-item">Samsung</li>
+                <li class="sidebar__menu-item">Xiaomi</li>
+                <li class="sidebar__menu-item">OPPO</li>
+                <li class="sidebar__menu-item">TECNO</li>
+                <li class="sidebar__menu-item">HONOR</li>
+                <li class="sidebar__menu-item">Nubia</li>
+                <li class="sidebar__menu-item">Sony</li>
+                <li class="sidebar__menu-item">Nokia</li>
+                <li class="sidebar__menu-item">Nothing phone</li>
+            </ul>
+        </div>
+        <div class="card_wrap">
+            <div class="card_container">
+            <div class="card">
+                        <div class="card_img"><img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_air-3_2.jpg" alt=""></div>
+                        <div class="card_info">
+                            <div class="card_name">iPhone Air 256GB | Chính hãng</div>
+                            <div class="card_new">Hàng mới về</div>
+                            <div class="crad_price">31.990.000đ</div>
+                            <div class="crad_sale">Smember giảm đến 320.000đ</div>
+                            <div class="card_evaluate">
+                            <div class="crad_rating"> ⭐5</div>
+                            <div class="card_like">
+                            <i class='bx  bx-heart'></i>   
+                            Yêu thích
+                            </div>
+                           
+                        </div>
+                              <div class="cart_btn">
+                                <button>Thêm vào giỏ hàng</button>
+                              </div>
+                        </div>
+                    </div>
+             <div class="card">
+                <div class="card_img"><img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/o/p/oppo-reno14-f-w.jpg" alt=""></div>
+                <div class="card_info">
+                    <div class="card_name">OPPO Reno14 F 5G 8GB 256GB</div>
+                    <div class="card_new">Hàng mới về</div>
+                    <div class="crad_price">10.300.000đ</div>
+                    <div class="crad_sale">Smember giảm đến 280.000đ</div>
+                    <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                    <div class="card_evaluate">
+                    <div class="crad_rating"> ⭐5</div>
+                    <div class="card_like">
+                    <i class='bx  bx-heart'></i>   
+                    Yêu thích
+                    </div>
+                </div>
+                      <div class="cart_btn">
+                          <button>Thêm vào giỏ hàng</button>
+                      </div>
+                </div>
+            </div>
+             <div class="card">
+                <div class="card_img"><img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/x/i/xiaomi-15t-5g-22.jpg" alt=""></div>
+                <div class="card_info">
+                    <div class="card_name">Xiaomi 15T 5G 12GB 512GB</div>
+                    <div class="card_new">Hàng mới về</div>
+                    <div class="crad_price">14.990.000đ</div>
+                    <div class="crad_sale">Smember giảm đến 280.000đ</div>
+                    <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                    <div class="card_evaluate">
+                    <div class="crad_rating"> ⭐5</div>
+                    <div class="card_like">
+                    <i class='bx  bx-heart'></i>   
+                    Yêu thích
+                    </div>
+                </div>
+                    <div class="cart_btn">
+                        <button>Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+ <script> 
+
+ // 1. Dùng chung cho cả Danh mục và Đăng nhập
+  document.addEventListener('click', (e) => {
+    // Ẩn Danh mục menu nếu click ra ngoài
+    if (headerListMenu && headerList) { // Check if elements exist
+        if (!headerList.contains(e.target) && !headerListMenu.contains(e.target)) {
+           headerListMenu.style.display = 'none';
+        }
+    }
+    // Ẩn Đăng nhập modal nếu click ra ngoài
+    if (categoryLoginRe && headerlogin) { // Check if elements exist
+        if (!headerlogin.contains(e.target) && !categoryLoginRe.contains(e.target)) {
+           categoryLoginRe.style.display = 'none';
+        }
+    }
+  });
+
+
+  // 2. Danh mục (Category)
+  const headerList = document.querySelector('.header_list');
+  const headerListMenu = document.getElementById('header_list_menu');
+  
+  if (headerList && headerListMenu) {
+      headerList.addEventListener('click', (e) => {
+        c
+        e.stopPropagation(); 
+        headerListMenu.style.display = 
+          headerListMenu.style.display === 'block' ? 'none' : 'block';
+      });
+  }
+
+
+  // 3. Đăng nhập (Login)
+  const headerlogin = document.querySelector('.header_login');
+  const categoryLoginRe = document.getElementById('header_login_register');
+
+  if (headerlogin && categoryLoginRe) {
+      headerlogin.addEventListener('click', (e) => {
+        // Ngăn chặn sự kiện click lan ra ngoài, tránh bị đóng ngay lập tức
+        e.stopPropagation();
+        categoryLoginRe.style.display = 
+          categoryLoginRe.style.display === 'block' ? 'none' : 'block';
+      });
+  }
+
+  // banner
+ let currentSlide = 0;
+
+function initializeHeroSlider() {
+  const slides = document.querySelectorAll('.slide');
+  updateSlide(slides);
+
+  setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSlide(slides);
+  }, 5000);
+}
+
+function updateSlide(slides) {
+  slides.forEach((slide, index) => {
+    slide.classList.toggle('active', index === currentSlide);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initializeHeroSlider);
+
+
+// phan gio hang
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    const cartCount = document.getElementById('cartCount');
+    const headerCart = document.querySelector('.header_cart');
+    const cartModal = document.getElementById('cartModal');
+    const closeCartModal = document.getElementById('closeCartModal');
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+
+    let cart = []; // Mảng lưu giỏ hàng
+
+    // Lấy tất cả nút "Thêm vào giỏ hàng"
+    const addToCartButtons = document.querySelectorAll('.cart_btn button');
+
+    addToCartButtons.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.card');
+            const name = card.querySelector('.card_name').innerText;
+            const priceText = card.querySelector('.crad_price').innerText;
+            const imgSrc = card.querySelector('.card_img img').src;
+
+            // Chuyển giá về số để tính tổng
+            const price = Number(priceText.replace(/\D/g, ''));
+
+            // Thêm vào giỏ hàng
+            cart.push({ name, price, imgSrc });
+            updateCartUI();
+        });
+    });
+
+    // Cập nhật UI giỏ hàng
+    function updateCartUI() {
+        cartCount.innerText = cart.length;
+
+        if(cart.length === 0){
+            cartItemsContainer.innerHTML = `<p class="empty-cart">Giỏ hàng của bạn đang trống</p>`;
+            cartTotal.innerText = "0₫";
+            return;
+        }
+
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+
+        cart.forEach((item, idx) => {
+            total += item.price;
+
+            const div = document.createElement('div');
+            div.classList.add('cart-item');
+            div.style.display = 'flex';
+            div.style.justifyContent = 'space-between';
+            div.style.alignItems = 'center';
+            div.style.marginBottom = '10px';
+
+            div.innerHTML = `
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <img src="${item.imgSrc}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;">
+                    <span>${item.name}</span>
+                </div>
+                <div>
+                    <span>${item.price.toLocaleString()}₫</span>
+                    <button data-index="${idx}" style="margin-left:10px; 
+                                                      padding:2px 5px;
+                                                      border:none; 
+                                                      background:black; 
+                                                      color:#fff; 
+                                                      border-radius:4px; 
+                                                      cursor:pointer;">Xóa
+                    </button>
+                </div>
+            `;
+            cartItemsContainer.appendChild(div);
+        });
+
+        cartTotal.innerText = total.toLocaleString() + "₫";
+
+        // Thêm sự kiện xóa
+        const deleteButtons = cartItemsContainer.querySelectorAll('button');
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const index = btn.getAttribute('data-index');
+                cart.splice(index, 1);
+                updateCartUI();
+            });
+        });
+    }
+
+    // Hiện modal khi click giỏ hàng
+    headerCart.addEventListener('click', () => {
+        cartModal.classList.add('show');
+    });
+
+    // Đóng modal
+    closeCartModal.addEventListener('click', () => {
+        cartModal.classList.remove('show');
+    });
+
+    // Click ra ngoài modal để đóng
+    cartModal.addEventListener('click', (e) => {
+        if(e.target === cartModal) {
+            cartModal.classList.remove('show');
+        }
+    });
+});
+ 
+//    
+
+// tim kiem
+const products = [
+  { id: 1, name: "iPhone 17 Pro", price: 35000000, category: "apple", img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-17-pro.jpg" },
+  { id: 2, name: "iPhone 16", price: 25000000, category: "apple", img: "https://cdn.tgdd.vn/Products/Images/42/317477/iphone-16-tim-thumb-600x600.jpg" },
+  { id: 3, name: "Samsung S25 Ultra", price: 32000000, category: "samsung", img: "https://cdn.tgdd.vn/Products/Images/42/333347/Slider/vi-vn-samsung-galaxy-s25-ultra-google-ai-pro.jpg" },
+  { id: 4, name: "Xiaomi 15 Ultra", price: 20000000, category: "xiaomi", img: "https://cdn.mobilecity.vn/mobilecity-vn/images/2025/03/xiaomi-15-ultra.jpg" },
+  { id: 5, name: "Samsung Z Flip 6", price: 28000000, category: "samsung", img: "https://cdn.tgdd.vn/Products/Images/42/307973/samsung-galaxy-z-flip6-xanh-thumb-600x600.jpg" },
+  { id: 6, name: "iPhone SE 3", price: 15000000, category: "apple", img: "https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-se-3.jpg" }
+];
+
+let currentPage = 1;
+const perPage = 4;
+
+function renderProducts(filtered) {
+  const productList = document.getElementById("productList");
+  productList.innerHTML = "";
+
+  const start = (currentPage - 1) * perPage;
+  const end = start + perPage;
+  const pageItems = filtered.slice(start, end);
+
+  pageItems.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "product-card";
+    div.innerHTML = `
+      <img src="${p.img}" alt="${p.name}">
+      <div class="info">
+        <div class="name">${p.name}</div>
+        <div class="price">${p.price.toLocaleString()}₫</div>
+      </div>
+    `;
+    productList.appendChild(div);
+  });
+
+  document.getElementById("pageInfo").textContent = `Trang ${currentPage}/${Math.ceil(filtered.length / perPage)}`;
+}
+
+function searchProducts() {
+  const keyword = document.getElementById("searchInput").value.toLowerCase();
+  return products.filter(p => p.name.toLowerCase().includes(keyword));
+}
+
+document.getElementById("searchBtn").addEventListener("click", () => {
+  currentPage = 1;
+  renderProducts(searchProducts());
+});
+
+document.getElementById("prevPage").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderProducts(searchProducts());
+  }
+});
+
+document.getElementById("nextPage").addEventListener("click", () => {
+  const filtered = searchProducts();
+  if (currentPage < Math.ceil(filtered.length / perPage)) {
+    currentPage++;
+    renderProducts(filtered);
+  }
+});
+const searchInput = document.getElementById('searchInput');
+  const searchIcon = document.querySelector('.header_search i');
+
+  function handleSearch() {
+    const keyword = searchInput.value.trim();
+    if (keyword) {
+      alert('Tìm kiếm: ' + keyword);
+      // Hoặc: window.location.href = `search.html?q=${encodeURIComponent(keyword)}`;
+    }
+  }
+
+  // Nhấn Enter
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleSearch();
+  });
+
+  // Click vào icon
+  searchIcon.addEventListener('click', handleSearch);
+// Hiển thị mặc định tất cả sản phẩm
+renderProducts(products);
+</script>
+
+ </body>
+ </html>
