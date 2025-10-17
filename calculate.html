@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+</head>
+<body>
+    <h2>Calculator</h2>
+    <form id="calculator">
+        <label for="soa">So a: </label>
+        <input type="number" id="soa"><br><br>
+        
+        <label for="sob">So b: </label>
+        <input type="number" id="sob"><br><br>
+
+        <label for="pt">Phép toán: </label>
+        <select id="pt">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select><br><br>
+
+        <label for="kq">Kết quả: </label>
+        <input type="text" id="kq" readonly><br><br>
+
+        <button type="button" onclick="calculate()">Tính</button>
+        <button type="button" onclick="clearFields()">Xóa</button>
+    </form>
+
+   <script>
+function calculate() {
+    var a = parseFloat(document.getElementById('soa').value);
+    var b = parseFloat(document.getElementById('sob').value);
+    var operator = document.getElementById('pt').value;
+    var result;
+
+    // Perform calculation based on selected operator
+    if (operator === '+') {
+        result = a + b;
+    } else if (operator === '-') {
+        result = a - b;
+    } else if (operator === '*') {
+        result = a * b;
+    } else if (operator === '/') {
+        result = a / b;
+    } else {
+        result = 'Invalid operator';
+    }
+
+    // Display the result
+    document.getElementById('kq').value = result;
+}
+
+function clearFields() {
+    // Clear all fields
+    document.getElementById('soa').value = '';
+    document.getElementById('sob').value = '';
+    document.getElementById('kq').value = '';
+    document.getElementById('pt').value = '+';
+}
+</script>
+</body>
+
+</html>
