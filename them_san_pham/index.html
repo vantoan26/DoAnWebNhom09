@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản Lý Cửa Hàng Điện Thoại</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Quản Lý Cửa Hàng Điện Thoại</h1>
+      </header>
+
+      <nav>
+        <div class="tab active" onclick="moTab('nhap')">Phiếu Nhập Hàng</div>
+        <div class="tab" onclick="moTab('gia')">Quản Lý Giá Bán</div>
+        <div class="tab" onclick="moTab('banggia')">Bảng Giá Chi Tiết</div>
+      </nav>
+
+      <!-- === TAB 1: PHIẾU NHẬP HÀNG === -->
+      <div id="nhap" class="content active">
+        <h2>Quản Lý Phiếu Nhập Hàng</h2>
+        <div class="search-box">
+          <input
+            type="text"
+            id="timPhieu"
+            placeholder="Tìm phiếu nhập (mã, ngày)..."
+            onkeyup="timPhieu()"
+          />
+        </div>
+
+        <button class="btn-success" onclick="moFormThemPhieu()">
+          + Thêm Phiếu Nhập
+        </button>
+
+        <table id="bangPhieu">
+          <thead>
+            <tr>
+              <th>Mã Phiếu</th>
+              <th>Ảnh</th>
+              <th>Ngày Nhập</th>
+              <th>Số SP</th>
+              <th>Tổng Tiền</th>
+              <th>Trạng Thái</th>
+              <th>Hành Động</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <!-- === TAB 2: QUẢN LÝ GIÁ BÁN === -->
+      <div id="gia" class="content">
+        <h2>Quản Lý Tỷ Lệ Lợi Nhuận (%)</h2>
+        <div class="form-row">
+          <select id="loaiSP">
+            <option value="">-- Chọn loại sản phẩm --</option>
+            <option>iPhone</option>
+            <option>Samsung</option>
+            <option>Xiaomi</option>
+            <option>Oppo</option>
+            <option>Khác</option>
+          </select>
+          <input
+            type="number"
+            id="tyLeChung"
+            placeholder="% LN chung cho loại"
+          />
+          <button onclick="capNhatTyLeChung()">Cập nhật chung</button>
+        </div>
+
+        <h3>Chi Tiết Theo Sản Phẩm</h3>
+        <div class="search-box">
+          <input
+            type="text"
+            id="timSanPhamGia"
+            placeholder="Tìm sản phẩm..."
+            onkeyup="timSanPhamGia()"
+          />
+        </div>
+        <table id="bangTyLe">
+          <thead>
+            <tr>
+              <th>Ảnh</th>
+              <th>Sản phẩm</th>
+              <th>Loại</th>
+              <th>Giá Nhập</th>
+              <th>% LN</th>
+              <th>Giá Bán</th>
+              <th>Hành Động</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <!-- === TAB 3: BẢNG GIÁ CHI TIẾT === -->
+      <div id="banggia" class="content">
+        <h2>Bảng Giá Chi Tiết</h2>
+        <div class="search-box">
+          <input
+            type="text"
+            id="timBangGia"
+            placeholder="Tìm sản phẩm..."
+            onkeyup="timBangGia()"
+          />
+        </div>
+        <table id="bangGiaChiTiet">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Ảnh</th>
+              <th>Sản phẩm</th>
+              <th>Loại</th>
+              <th>Giá Nhập</th>
+              <th>% Lợi Nhuận</th>
+              <th>Giá Bán</th>
+              <th>Nguồn</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal: Thêm/Sửa Phiếu Nhập -->
+    <div
+      id="modalPhieu"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div
+        style="
+          background: white;
+          padding: 25px;
+          border-radius: 12px;
+          width: 90%;
+          max-width: 800px;
+          max-height: 90vh;
+          overflow-y: auto;
+        "
+      >
+        <h3 id="tieuDeModal">Thêm Phiếu Nhập Mới</h3>
+        <div class="form-row">
+          <input type="date" id="ngayNhap" />
+          <input
+            type="text"
+            id="maPhieu"
+            placeholder="Mã phiếu (tự động nếu để trống)"
+          />
+        </div>
+        <hr />
+        <h4>Chi Tiết Sản Phẩm</h4>
+        <div id="chiTietSP">
+          <div class="form-row" style="align-items: end">
+            <input
+              type="file"
+              accept="image/*"
+              class="anhSP"
+              onchange="xemTruocAnh(this)"
+              style="width: 100px"
+            />
+            <input type="text" placeholder="Tên sản phẩm" class="tenSP" />
+            <select class="loaiSP">
+              <option>iPhone</option>
+              <option>Samsung</option>
+              <option>Xiaomi</option>
+              <option>Oppo</option>
+              <option>Khác</option>
+            </select>
+            <input
+              type="number"
+              placeholder="Số lượng"
+              class="soLuong"
+              min="1"
+            />
+            <input
+              type="number"
+              placeholder="Giá nhập"
+              class="giaNhap"
+              min="0"
+            />
+            <button
+              type="button"
+              onclick="this.parentElement.remove()"
+              class="btn-danger"
+            >
+              Xóa
+            </button>
+          </div>
+        </div>
+        <button
+          onclick="themDongSP()"
+          class="btn-success"
+          style="margin: 10px 0"
+        >
+          + Thêm sản phẩm
+        </button>
+        <div style="text-align: right; margin-top: 15px">
+          <button onclick="dongModal()" class="btn-warning">Hủy</button>
+          <button onclick="luuPhieu()" class="btn-success">Lưu Phiếu</button>
+        </div>
+      </div>
+    </div>
+    <script src="quanly.js"></script>
+  </body>
+</html>
