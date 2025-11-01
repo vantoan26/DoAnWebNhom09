@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý đăng nhập</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            position: absolute;
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            font-size: 1.8em;
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+
+        input[type=text],
+        input[type=password],
+        input[type=email] {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            transition: border-color 0.3s, background 0.3s;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: white;
+        }
+
+
+        button {
+            width: 100%;
+            padding: 12px;
+
+            background: linear-gradient(45deg, #06b6d4, #6366f1);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #0891b2, #4f46e5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .container p {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .container a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .container a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+
+        .hidden {
+            display: none !important;
+        }
+
+        .info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px dashed rgba(255, 255, 255, 0.5);
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <div class="container" id="registerDiv">
+            <h2>Đăng ký</h2>
+            <input type="text" id="regName" placeholder="Tên người dùng">
+            <input type="email" id="regEmail" placeholder="Email">
+            <input type="password" id="regPass" placeholder="Mật khẩu">
+            <button onclick="register()">Đăng ký</button>
+            <p>Đã có tài khoản? <a href="#" onclick="showLogin()">Đăng nhập</a></p>
+        </div>
+
+        <div class="container hidden" id="loginDiv">
+            <h2>Đăng nhập</h2>
+            <input type="email" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPass" placeholder="Mật khẩu">
+            <button id="btn" onclick="login()">Đăng nhập</button>
+            <p>Chưa có tài khoản? <a href="#" onclick="showRegister()">Đăng ký</a></p>
+        </div>
+
+        <div class="container hidden" id="profileDiv">
+            <h2>Thông tin cá nhân</h2>
+            <div class="info" id="profileInfo"></div>
+            <button onclick="logout()">Đăng xuất</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Khởi tạo/Tải dữ liệu users từ localStorage
+        let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+        let currentUser = null;
+
+        // Tải người dùng hiện tại nếu có trạng thái đăng nhập được lưu (chỉ để hiển thị profile trên trang này)
+        function loadCurrentUser() {
+            const loggedInEmail = localStorage.getItem('loggedInUserEmail');
+            if (loggedInEmail) {
+                currentUser = users.find(u => u.email === loggedInEmail);
+                if (currentUser) {
+                    showProfile();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Lưu dữ liệu users vào localStorage sau khi đăng ký/cập nhật
+        function saveUsers() {
+            localStorage.setItem('registeredUsers', JSON.stringify(users));
+        }
+
+        function showRegister() {
+            document.getElementById('registerDiv').classList.remove('hidden');
+            document.getElementById('loginDiv').classList.add('hidden');
+            document.getElementById('profileDiv').classList.add('hidden');
+        }
+
+        function showLogin() {
+            document.getElementById('registerDiv').classList.add('hidden');
+            document.getElementById('loginDiv').classList.remove('hidden');
+            document.getElementById('profileDiv').classList.add('hidden');
+        }
+
+        function showProfile() {
+            document.getElementById('registerDiv').classList.add('hidden');
+            document.getElementById('loginDiv').classList.add('hidden');
+            document.getElementById('profileDiv').classList.remove('hidden');
+
+            // Kiểm tra currentUser trước khi truy cập thuộc tính
+            if (currentUser) {
+                document.getElementById('profileInfo').innerHTML = `
+            Tên: ${currentUser.name} <br>
+            Email: ${currentUser.email} <br>
+            Password: ${currentUser.pass}
+        `;
+            }
+        }
+
+
+        function register() {
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const pass = document.getElementById('regPass').value;
+
+            if (!name || !email || !pass) {
+                alert("Vui lòng điền đủ thông tin"); return;
+            }
+            if (users.find(u => u.email === email)) {
+                alert("Email đã tồn tại"); return;
+            }
+
+            users.push({ name, email, pass });
+            saveUsers(); // Lưu user mới vào localStorage
+            alert("Đăng ký thành công!");
+            showLogin();
+        }
+
+        // *** HÀM LOGIN ĐÃ SỬA: LƯU TRẠNG THÁI VÀ CHUYỂN TRANG SAU 2S ***
+        function login() {
+            const email = document.getElementById('loginEmail').value;
+            const pass = document.getElementById('loginPass').value;
+
+            const user = users.find(u => u.email === email && u.pass === pass);
+
+            if (!user) {
+                alert("Email hoặc mật khẩu sai"); return;
+            }
+
+            currentUser = user;
+
+            // 1. LƯU TRẠNG THÁI ĐĂNG NHẬP VÀO LOCALSTORAGE
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('username', user.name);
+            localStorage.setItem('loggedInUserEmail', user.email);
+
+            alert(`Đăng nhập thành công! Chào mừng ${user.name}`);
+
+
+            setTimeout(() => {
+                window.location.href = "bandienthoai2.html";
+            }, 2000);
+        }
+
+        function logout() {
+            currentUser = null;
+
+            // XÓA TRẠNG THÁI ĐĂNG NHẬP
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            localStorage.removeItem('loggedInUserEmail');
+
+            alert("Đăng xuất thành công");
+            showLogin();
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCurrentUser();
+        });
+
+
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const username = document.getElementById("usernameInput").value;
+            const password = document.getElementById("passwordInput").value;
+
+            // Giả sử kiểm tra username/password thành công
+            if (username && password) {
+                localStorage.setItem("username", username);
+
+                window.location.href = "bandienthoai2.html";
+            } else {
+                alert("Sai tên đăng nhập hoặc mật khẩu");
+            }
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>

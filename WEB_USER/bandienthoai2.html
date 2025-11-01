@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bandienthoai2.css">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="header_logo">LOGO</div>
+        <div class="header_list">
+            <i class='bxr  bx-list-ul'></i>
+            Danh mục
+            <i class='bxr  bx-chevron-down'></i>
+        </div>
+        <div class="header_location">
+            <i class='bxr  bx-location-alt'></i>
+            Địa chỉ
+            <i class='bxr  bx-chevron-down'></i>
+        </div>
+        <div class="header_search">
+            <i class='bx bx-search'></i>
+            <input type="text" id="searchInput" placeholder="Bạn muốn mua gì?">
+        </div>
+        <div class="header_cart">
+            Giỏ hàng
+            <i class='bxr  bx-cart'></i>
+            <span class="badge" id="cartCount">0</span>
+        </div>
+        <div class="header_login">
+            Đăng nhập
+            <i class='bxr  bx-user'></i>
+        </div>
+    </div>
+    </div>
+
+    <!-- location -->
+    <div class="city-selector" id="citySelector">
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Nhập tên tỉnh thành">
+            <button id="closeBtn">Đóng ×</button>
+        </div>
+        <div class="city-list">
+            <ul class="city-list">
+                <li class="city-item selected">Hồ Chí Minh</li>
+                <li class="city-item">Hà Nội</li>
+                <li class="city-item">An Giang</li>
+                <li class="city-item">Bà Rịa - Vũng Tàu</li>
+                <li class="city-item">Bạc Liêu</li>
+                <li class="city-item">Bắc Giang</li>
+                <li class="city-item">Bắc Ninh</li>
+                <li class="city-item">Bến Tre</li>
+                <li class="city-item">Bình Dương</li>
+                <li class="city-item">Bình Định</li>
+                <li class="city-item">Cà Mau</li>
+                <li class="city-item">Cần Thơ</li>
+                <li class="city-item">Đà Nẵng</li>
+                <li class="city-item">Đắk Lắk</li>
+                <li class="city-item">Đắk Nông</li>
+                <li class="city-item">Điện Biên</li>
+                <li class="city-item">Gia Lai</li>
+                <li class="city-item">Hà Giang</li>
+                <li class="city-item">Hà Nam</li>
+                <li class="city-item">Hải Dương</li>
+                <li class="city-item">Hải Phòng</li>
+                <li class="city-item">Hậu Giang</li>
+                <li class="city-item">Hòa Bình</li>
+                <li class="city-item">Hưng Yên</li>
+                <li class="city-item">Khánh Hòa</li>
+                <li class="city-item">Kiên Giang</li>
+                <li class="city-item">Kon Tum</li>
+                <li class="city-item">Lai Châu</li>
+                <li class="city-item">Lâm Đồng</li>
+                <li class="city-item">Lạng Sơn</li>
+                <li class="city-item">Lào Cai</li>
+                <li class="city-item">Long An</li>
+                <li class="city-item">Nam Định</li>
+                <li class="city-item">Nghệ An</li>
+                <li class="city-item">Ninh Bình</li>
+                <li class="city-item">Ninh Thuận</li>
+                <li class="city-item">Phú Thọ</li>
+                <li class="city-item">Phú Yên</li>
+                <li class="city-item">Quảng Bình</li>
+                <li class="city-item">Quảng Nam</li>
+                <li class="city-item">Quảng Ngãi</li>
+                <li class="city-item">Quảng Ninh</li>
+                <li class="city-item">Quảng Trị</li>
+                <li class="city-item">Sóc Trăng</li>
+                <li class="city-item">Sơn La</li>
+                <li class="city-item">Tây Ninh</li>
+                <li class="city-item">Thái Bình</li>
+                <li class="city-item">Thái Nguyên</li>
+                <li class="city-item">Thanh Hóa</li>
+                <li class="city-item">Thừa Thiên Huế</li>
+                <li class="city-item">Tiền Giang</li>
+                <li class="city-item">Trà Vinh</li>
+                <li class="city-item">Tuyên Quang</li>
+                <li class="city-item">Vĩnh Long</li>
+                <li class="city-item">Vĩnh Phúc</li>
+                <li class="city-item">Yên Bái</li>
+            </ul>
+
+        </div>
+    </div>
+
+
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+                <h3>Giỏ hàng của bạn</h3>
+                <button class="modal-close" id="closeCartModal">&times;</button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body">
+                <!-- Giỏ hàng -->
+                <div id="cartItems">
+                    <p class="empty-cart">Giỏ hàng của bạn đang trống</p>
+                </div>
+
+                <!-- Form chọn địa chỉ -->
+                <div class="cart_location_pay">
+                    <div class="cart_section">
+                        <h3 class="cart-section-title">Địa chỉ giao hàng</h3>
+                        <div class="cart-address-options">
+                            <label>
+                                <input type="radio" name="addressOption" value="account" checked> Sử dụng địa chỉ từ tài
+                                khoản
+                            </label>
+                            <label>
+                                <input type="radio" name="addressOption" value="new"> Nhập địa chỉ mới
+                            </label>
+                        </div>
+                        <div id="newAddressFields" class="cart-new-address">
+                            <input type="text" id="recipientName" placeholder="Họ và tên">
+                            <input type="text" id="recipientPhone" placeholder="Số điện thoại">
+                            <input type="text" id="recipientAddress" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phương thức thanh toán -->
+                <div class="cart_section">
+                    <h3 class="cart-section-title">Phương thức thanh toán</h3>
+                    <select id="paymentMethod" class="cart-payment">
+                        <option value="cod" selected>Tiền mặt khi nhận hàng</option>
+                        <option value="bank">Chuyển khoản</option>
+                        <option value="online">Thanh toán trực tuyến</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <div class="cart-total">
+                    <strong>Tổng cộng: <span id="cartTotal">0₫</span></strong>
+                </div>
+                <button class="btn-primary btn-checkout" id="btn-primary">THANH TOÁN</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--menu danh sach-->
+    <div class="header_list_menu" id="header_list_menu">
+        <ul>
+            <li><a href="iphonecart.html">Apple</a> <i class='bxr  bx-chevron-right'></i> </li>
+            <li><a href="samsungcart2.html">Samsung </a> <i class='bxr  bx-chevron-right'></i> </li>
+            <li>Oppo <i class='bxr  bx-chevron-right'></i> </li>
+            <li>Xiaomi <i class='bxr  bx-chevron-right'></i> </li>
+            <li>Huawei <i class='bxr  bx-chevron-right'></i> </li>
+            <li>Vivo <i class='bxr  bx-chevron-right'></i> </li>
+            <li>Realme <i class='bxr  bx-chevron-right'></i> </li>
+        </ul>
+    </div>
+
+    <!--dang nhap-->
+    <div class="header_login_register" id="header_login_register">
+        <div class="header_login_register_title">LOGIN</div>
+        <div class="header_login_register_message">Vui lòng đăng nhập để xem thông tin !!!</div>
+        <div class="header_login_register_action">
+            <div class="header_login_register_re"><a href="login4.html">Đăng kí</a></div>
+            <div class="header_login_register_log"> <a href="login4.html">Đăng nhập</a></div>
+        </div>
+    </div>
+
+
+    <!--banner-->
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="slide active" data-bg="gradient-blue">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <span>4.9/5 đánh giá</span>
+                        </div>
+                        <h1>Khám phá iPhone 17 Pro</h1>
+                        <h2>Hiệu năng vượt trội</h2>
+                        <p>Trải nghiệm công nghệ đỉnh cao với thiết kế sang trọng và camera AI thông minh.</p>
+                        <div class="hero-buttons">
+                            <button class="btn-primary">Mua ngay</button>
+                            <button class="btn-outline">Tìm hiểu thêm</button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:1036:450/q:90/plain/https://dashboard.cellphones.com.vn/storage/690x300_iPhone_17_Pro_Opensale_v3.png"
+                            alt="iPhone 17 Pro">
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide" data-bg="gradient-pink">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <span>5.0/5 đánh giá</span>
+                        </div>
+                        <h1>Galaxy S25 Ultra</h1>
+                        <h2>Google AI tích hợp</h2>
+                        <p>Camera zoom 200x, pin siêu bền và AI hỗ trợ mọi thao tác.</p>
+                        <div class="hero-buttons">
+                            <button class="btn-primary">Khám phá</button>
+                            <button class="btn-outline">Chi tiết</button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://cdn.tgdd.vn/Products/Images/42/333347/Slider/vi-vn-samsung-galaxy-s25-ultra-google-ai-pro.jpg"
+                            alt="Galaxy S25 Ultra">
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide" data-bg="gradient-k">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <span>5.0/5 đánh giá</span>
+                        </div>
+                        <h1>Xiaomi 15 Ultra</h1>
+                        <h2>Camera LEICA đỉnh cao</h2>
+                        <p>Trang bị Snapdragon® 8 Elite, màn hình WQHD+ siêu sáng 3200 nit, RAM lên đến 16GB và bộ nhớ
+                            1TB. Thiết kế lấy cảm hứng từ máy ảnh Leica, mang đến trải nghiệm nhiếp ảnh chuyên nghiệp
+                            ngay trên smartphone.</p>
+                        <div class="hero-buttons">
+                            <button class="btn-primary">Khám phá</button>
+                            <button class="btn-outline">Chi tiết</button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/15a7b269-53a2-4fe4-8da3-48d013a2d553.__CR0,0,970,600_PT0_SX970_V1___.jpg"
+                            alt="Galaxy S25 Ultra">
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide" data-bg="gradient-d">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <span>4.9/5 đánh giá</span>
+                        </div>
+                        <h1>Khám phá OPPO Find X9</h1>
+                        <h2>Thiết kế đột phá</h2>
+                        <p>Trải nghiệm công nghệ tiên tiến với camera siêu nét và hiệu năng mạnh mẽ.</p>
+                        <div class="hero-buttons">
+                            <button class="btn-primary">Mua ngay</button>
+                            <button class="btn-outline">Tìm hiểu thêm</button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:1036:450/q:90/plain/https://dashboard.cellphones.com.vn/storage/oppo-find-x9-pre-home.png"
+                            alt="iPhone 17 Pro">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="recommendations">
+        <h1 class="recommendations__title">GỢI Ý CHO BẠN</h1>
+        <div class="slider-container">
+            <div class="recommendations__list">
+                <div class="card">
+                    <div class="card_img">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_air-3_2.jpg"
+                            alt="">
+                    </div>
+                    <div class="card_info">
+                        <div class="card_name">iPhone Air 256GB | Chính hãng</div>
+                        <div class="crad_price">31.990.000đ</div>
+                        <s class="card_price_old">35.000.000đ</s>
+                        <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="card_like">
+                                <i class='bx bx-heart'></i> Yêu thích
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card_img">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/x/i/xiaomi-redmi-note-13-pro-plus_9__1.png"
+                            alt="">
+                    </div>
+                    <div class="card_info">
+                        <div class="card_name">Xiaomi Redmi Note 13 Pro Plus 5G 8GB 256GB</div>
+                        <div class="crad_price">6.290.000đ</div>
+                        <s class="card_price_old">10.780.000đ</s>
+                        <div class="crad_student">s-Student giảm thêm 500.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="card_like">
+                                <i class='bx bx-heart'></i> Yêu thích
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card_img">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/k/i/kinh-cuong-luc-xiaomi-mi-lite-5g-zeelot.jpeg"
+                            alt="">
+                    </div>
+                    <div class="card_info">
+                        <div class="card_name">Dán kính cường lực màn hình Xiaomi Mi 11 Lite 5G Zeloot</div>
+                        <div class="crad_price">57.600đ</div>
+                        <s class="card_price_old">96.000đ</s>
+                        <div class="crad_student">s-Student giảm thêm 5000đ</div>
+                        <div class="card_evaluate">
+                            <div class="card_like">
+                                <i class='bx bx-heart'></i> Yêu thích
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card_img">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/o/p/op-lung-iphone-14-uniq-hybird-lino-hue-with-magsafe.png"
+                            alt="">
+                    </div>
+                    <div class="card_info">
+                        <div class="card_name">Ốp lưng iPhone 13/14 Uniq Hybird Lino Hue </div>
+                        <div class="crad_price">364.800đ</div>
+                        <s class="card_price_old">600.000đ</s>
+                        <div class="crad_student">s-Student giảm thêm 100.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="card_like">
+                                <i class='bx bx-heart'></i> Yêu thích
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card_img">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/o/p/op.ip23.41.ne-7.jpg"
+                            alt="">
+                    </div>
+                    <div class="card_info">
+                        <div class="card_name">Ốp lưng kèm dây đeo iPhone 17 Pro Max UAG </div>
+                        <div class="crad_price">1.700.000đ</div>
+                        <s class="card_price_old">2.200.000đ</s>
+                        <div class="crad_student">s-Student giảm thêm 200.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="card_like">
+                                <i class='bx bx-heart'></i> Yêu thích
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card_img">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_4__6_73.png"
+                            alt="">
+                    </div>
+                    <div class="card_info">
+                        <div class="card_name">OPPO Reno12 F 5G 8GB 256GB</div>
+                        <div class="crad_price">7.120.000đ</div>
+                        <s class="card_price_old">9.500.000đ</s>
+                        <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="card_like">
+                                <i class='bx bx-heart'></i> Yêu thích
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card_img">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/o/p/op-lung-iphone-15-pro-max-devilcase-guadian-pro-2-vien-camera_4.png"
+                            alt="">
+                    </div>
+                    <div class="card_info">
+                        <div class="card_name">Ốp lưng iPhone 15 Pro Max Devilcase Guadian Pro 2 </div>
+                        <div class="crad_price">299.000đ</div>
+                        <s class="card_price_old">1.100.000đ</s>
+                        <div class="crad_student">s-Student giảm thêm 100.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="card_like">
+                                <i class='bx bx-heart'></i> Yêu thích
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card_img">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/i/vivo-v29e_5__1.png"
+                            alt="">
+                    </div>
+                    <div class="card_info">
+                        <div class="card_name">vivo V29E 8GB 256GB - Đã Kích Hoạt</div>
+                        <div class="crad_price">4.590.000đ</div>
+                        <s class="card_price_old">9.500.000đ</s>
+                        <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="card_like">
+                                <i class='bx bx-heart'></i> Yêu thích
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="sidebar__logo-wrapper">
+            <div class="sidebar__logo">
+                <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:214:530/q:90/plain/https://media-asset.cellphones.com.vn/page_configs/01K6F050R8WY7PZK75J36ST4CV.png"
+                    alt="">
+            </div>
+            <div class="sidebar__logo">
+                <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:214:530/q:90/plain/https://media-asset.cellphones.com.vn/page_configs/01K7EHA6JK5P0M1X61ENXTE983.png"
+                    alt="">
+            </div>
+        </div>
+        <div class="sidebar__menu">
+            <div class="sidebar__menu-title">ĐIỆN THOẠI</div>
+            <div class="sidebar_menu_listt">
+                <ul class="sidebar__menu-list sidebar__menu-list--feature">
+                    <li class="sidebar__menu-item">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/icon/mobile-gamning.png"
+                            alt="">
+                        Điện thoại chơi game
+                    </li>
+                    <li class="sidebar__menu-item">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/icon/mobile-pin.png"
+                            alt="">
+                        Điện thoại pin trâu
+                    </li>
+                    <li class="sidebar__menu-item">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/icon/mobile-5g_1.png"
+                            alt="">
+                        Điện thoại 5G
+                    </li>
+                    <li class="sidebar__menu-item">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/icon/mobile-chup-anh.png"
+                            alt="">
+                        Điện thoại chụp hình đẹp
+                    </li>
+                    <li class="sidebar__menu-item">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Web/icon/mobile-gap_1.png"
+                            alt="">
+                        Điện thoại gập
+                    </li>
+                    <li class="sidebar__menu-item">
+                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:96:96/q:90/plain/https://cellphones.com.vn/media/wysiwyg/dien-thoai-ai-icon-cate.png"
+                            alt="">
+                        Điện thoại AI
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar_menu_listt">
+                <ul class="sidebar__menu-list sidebar__menu-list--brand">
+                    <li class="sidebar__menu-item">Apple</li>
+                    <li class="sidebar__menu-item">Samsung</li>
+                    <li class="sidebar__menu-item">Xiaomi</li>
+                    <li class="sidebar__menu-item">OPPO</li>
+                    <li class="sidebar__menu-item">TECNO</li>
+                    <li class="sidebar__menu-item">HONOR</li>
+                    <li class="sidebar__menu-item">Nubia</li>
+                    <li class="sidebar__menu-item">Sony</li>
+                    <li class="sidebar__menu-item">Nokia</li>
+                    <li class="sidebar__menu-item">Nothing phone</li>
+                </ul>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" id="searchName" placeholder="Nhập tên sản phẩm...">
+                <select id="searchCategory">
+                    <option value="">Tất cả loại</option>
+                    <option value="phone">Điện thoại</option>
+                    <option value="accessory">Phụ kiện</option>
+                </select>
+                <input type="number" id="minPrice" placeholder="Giá thấp nhất">
+                <input type="number" id="maxPrice" placeholder="Giá cao nhất">
+                <button id="btnSearch">Tìm kiếm</button>
+            </div>
+
+            <!-- Danh sách sản phẩm -->
+            <div id="productList" class="product-list"></div>
+
+            <div class="card_wrap">
+                <div class="card_container">
+                    <div class="card">
+                        <div class="card_img"><img
+                                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/x/9/x9-1.jpg"
+                                alt=""></div>
+                        <div class="card_info">
+                            <div class="card_name">OPPO Find X9 16GB/256GB</div>
+                            <div class="card_new">Hàng mới về</div>
+                            <div class="crad_price">22.990.000đ</div>
+                            <div class="crad_sale">Smember giảm đến 280.000đ</div>
+                            <div class="crad_student">s-Student giảm thêm 200.000đ</div>
+                            <div class="card_evaluate">
+                                <div class="crad_rating"> ⭐5</div>
+                                <div class="card_like">
+                                    <i class='bx  bx-heart'></i>
+                                    Yêu thích
+                                </div>
+                            </div>
+                            <div class="cart_btn">
+                                <button>Thêm vào giỏ hàng</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card"> <a href="inforcart.html">
+                            <div class="card_img"><img
+                                    src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-pro-max.png"
+                                    alt=""></div>
+                            <div class="card_info">
+                                <div class="card_name">Điện thoại iPhone 16 Pro Max 256GB</div>
+                                <div class="card_new">Hàng mới về</div>
+                                <div class="crad_price">30.590.000đ</div>
+                                <div class="crad_sale">Smember giảm đến 280.000đ</div>
+                                <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                                <div class="card_evaluate">
+                                    <div class="crad_rating"> ⭐4.9</div>
+                                    <div class="card_like">
+                                        <i class='bx  bx-heart'></i>
+                                        Yêu thích
+                                    </div>
+                                </div>
+                        </a>
+                        <div class="cart_btn">
+                            <button>Thêm vào giỏ hàng</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card_img"><img
+                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_air-3_2.jpg"
+                            alt=""></div>
+                    <div class="card_info">
+                        <div class="card_name">iPhone Air 256GB | Chính hãng</div>
+                        <div class="card_new">Hàng mới về</div>
+                        <div class="crad_price">31.990.000đ</div>
+                        <div class="crad_sale">Smember giảm đến 320.000đ</div>
+                        <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="crad_rating"> ⭐5</div>
+                            <div class="card_like">
+                                <i class='bx  bx-heart'></i>
+                                Yêu thích
+                            </div>
+                        </div>
+                        <div class="cart_btn">
+                            <button>Thêm vào giỏ hàng</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card_img"><img
+                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/o/p/oppo-reno14-f-w.jpg"
+                            alt=""></div>
+                    <div class="card_info">
+                        <div class="card_name">OPPO Reno14 F 5G 8GB 256GB</div>
+                        <div class="card_new">Hàng mới về</div>
+                        <div class="crad_price">10.300.000đ</div>
+                        <div class="crad_sale">Smember giảm đến 280.000đ</div>
+                        <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="crad_rating"> ⭐5</div>
+                            <div class="card_like">
+                                <i class='bx  bx-heart'></i>
+                                Yêu thích
+                            </div>
+                        </div>
+                        <div class="cart_btn">
+                            <button>Thêm vào giỏ hàng</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card_img"><img
+                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/x/i/xiaomi-15t-5g-22.jpg"
+                            alt=""></div>
+                    <div class="card_info">
+                        <div class="card_name">Xiaomi 15T 5G 12GB 512GB</div>
+                        <div class="card_new">Hàng mới về</div>
+                        <div class="crad_price">14.990.000đ</div>
+                        <div class="crad_sale">Smember giảm đến 280.000đ</div>
+                        <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="crad_rating"> ⭐5</div>
+                            <div class="card_like">
+                                <i class='bx  bx-heart'></i>
+                                Yêu thích
+                            </div>
+                        </div>
+                        <div class="cart_btn">
+                            <button>Thêm vào giỏ hàng</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card_img"><img
+                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone_17_pro_512gb.jpg"
+                            alt=""></div>
+                    <div class="card_info">
+                        <div class="card_name">iPhone 17 Pro 512GB | Chính Hãng</div>
+                        <div class="card_new">Hàng mới về</div>
+                        <div class="crad_price">41.300.000đ</div>
+                        <div class="crad_sale">Smember giảm đến 280.000đ</div>
+                        <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="crad_rating"> ⭐5</div>
+                            <div class="card_like">
+                                <i class='bx  bx-heart'></i>
+                                Yêu thích
+                            </div>
+                        </div>
+                        <div class="cart_btn">
+                            <button>Thêm vào giỏ hàng</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card_img"><img
+                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/x/i/xiaomi_14t_pro_1_.png"
+                            alt=""></div>
+                    <div class="card_info">
+                        <div class="card_name">Xiaomi 14T Pro 12GB 512GB</div>
+                        <div class="card_new">Hàng mới về</div>
+                        <div class="crad_price">10.300.000đ</div>
+                        <div class="crad_sale">Smember giảm đến 280.000đ</div>
+                        <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="crad_rating"> ⭐5</div>
+                            <div class="card_like">
+                                <i class='bx  bx-heart'></i>
+                                Yêu thích
+                            </div>
+                        </div>
+                        <div class="cart_btn">
+                            <button>Thêm vào giỏ hàng</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card_img"><img
+                            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-z-flip-7-xanh.jpg"
+                            alt=""></div>
+                    <div class="card_info">
+                        <div class="card_name">Samsung Galaxy Z Flip7 12GB 256GB</div>
+                        <div class="card_new">Hàng mới về</div>
+                        <div class="crad_price">26.990.000đ</div>
+                        <div class="crad_sale">Smember giảm đến 280.000đ</div>
+                        <div class="crad_student">s-Student giảm thêm 700.000đ</div>
+                        <div class="card_evaluate">
+                            <div class="crad_rating"> ⭐5</div>
+                            <div class="card_like">
+                                <i class='bx  bx-heart'></i>
+                                Yêu thích
+                            </div>
+                        </div>
+                        <div class="cart_btn">
+                            <button>Thêm vào giỏ hàng</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Phân trang -->
+        <div class="pagination">
+            <button id="prevPage">«</button>
+            <span id="pageInfo"></span>
+            <button id="nextPage">»</button>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="newsletter">
+        <h1 class="newsletter__title">ĐĂNG KÝ NHẬN TIN MỚI</h1>
+        <h3 class="newsletter__subtitle">
+            Nhận thông tin về sản phẩm mới và ưu đãi đặc biệt
+        </h3>
+        <div class="newsletter__form">
+            <input type="text" class="newsletter__input" id="newsletterEmail" placeholder="Nhập email của bạn">
+            <button class="newsletter__button" id="newsletterBtn">ĐĂNG KÝ</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer__container">
+
+            <!-- Cột 1: Logo & thông tin -->
+            <div class="footer__about">
+                <h1 class="footer__title">LOGO</h1>
+                <p class="footer__description">
+                    Cửa hàng điện thoại hàng đầu Việt Nam. <br>
+                    Chất lượng cao, giá cả hợp lý.
+                </p>
+
+                <div class="footer__contact">
+                    <div class="footer__contact-item">
+                        <i class='bx bx-phone'></i>
+                        <span>SỐ ĐIỆN THOẠI</span>
+                    </div>
+                    <div class="footer__contact-item">
+                        <i class='bx bx-envelope'></i>
+                        <span>EMAIL</span>
+                    </div>
+                    <div class="footer__contact-item">
+                        <i class='bx bx-location-plus'></i>
+                        <span>ĐỊA CHỈ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột 2: Liên kết nhanh -->
+            <div class="footer__links">
+                <h2 class="footer__title">LIÊN KẾT NHANH</h2>
+                <ul class="footer__list">
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Sản phẩm</a></li>
+                    <li><a href="#">Tin tức</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 3: Chăm sóc khách hàng -->
+            <div class="footer__customer">
+                <h2 class="footer__title">CHĂM SÓC KHÁCH HÀNG</h2>
+                <ul class="footer__list">
+                    <li> <a href="#">Hướng dẫn mua hàng</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li> <a href="#">Bảo hành</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 4: Theo dõi chúng tôi -->
+            <div class="footer__social">
+                <h2 class="footer__title">THEO DÕI CHÚNG TÔI</h2>
+                <ul class="footer__social-list">
+                    <li><img src="https://tse2.mm.bing.net/th/id/OIP.bD6otkD2EDUCHCDdXc03-gHaGK?pid=Api&P=0&h=180"
+                            alt=""></li>
+                    <li><img src="https://freepnglogo.com/images/all_img/1715966585instagram-lite-logo.png" alt=""></li>
+                    <li><img src="https://images.seeklogo.com/logo-png/27/2/youtube-icon-logo-png_seeklogo-270054.png"
+                            alt=""></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="bandienthoai2.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Inter, Roboto, sans-serif;
+      ;
+    }
+
+    .product-detail__title {
+      font-size: 25px;
+      margin: 15px 0;
+    }
+
+    .product-detail {
+      display: flex;
+      width: 80%;
+      justify-content: space-around;
+      align-items: center;
+      margin: 0 auto;
+    }
+
+    .product-actions__list {
+      display: flex;
+      list-style: none;
+      margin: 10px 0;
+      gap: 5px;
+
+    }
+
+    .product-actions__item {
+      display: flex;
+      font-size: 20px;
+      align-items: center;
+      color: #73A6F9;
+      padding: 0 10px;
+      margin: 10px 0;
+      cursor: pointer;
+      border-right: 1px solid #ccc;
+    }
+
+    .product-detail__rating {
+      font-size: 20px;
+      font-weight: 300;
+      cursor: pointer;
+    }
+
+    .product-detail__overview {
+      display: flex;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #71b7e6, #9b59b6);
+      width: 568px;
+      height: 300px;
+      align-items: center;
+    }
+
+    .product-detail__overview img {
+      width: 200px;
+      height: 200px;
+      margin-left: 20px;
+      border-radius: 10px;
+    }
+
+    .features__title {
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .product-overview__features {
+      margin: 0 20px;
+      color: white;
+    }
+
+    .features__text {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .product-detaill {
+      margin: 0 50px 0 50px;
+
+    }
+
+    .product-detail__price {
+      display: flex;
+      border: 1px solid #93BAFB;
+      width: 550px;
+      height: 140px;
+      background-color: #F4F9FF;
+      justify-content: space-around;
+      margin: 50px 0;
+      border-radius: 10px;
+    }
+
+    .price__item {
+      font-weight: bold;
+
+    }
+
+    .price__label {
+      font-size: 16px;
+      margin: 30px 0 0 0;
+      border-radius: 5px;
+      padding: 0 5px;
+      background-color: #DBE8FE;
+    }
+
+    .price__value {
+      font-size: 20px;
+      margin: 20px 0 0 0;
+    }
+
+    .version__list {
+      display: flex;
+      list-style: none;
+      margin: 15px 0;
+    }
+
+    .version__item {
+      width: 80px;
+      height: 40px;
+      border-radius: 8px;
+      margin: 0 15px;
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+    }
+
+    .color__list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .color__item {
+      display: flex;
+      margin: 10px 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 8px 8px;
+      cursor: pointer;
+    }
+
+    .color__price {
+      margin: 5px 0 0 0;
+    }
+
+    .color__name {
+      font-weight: bold;
+    }
+
+    .product_fixed {
+      position: fixed;
+      bottom: 20px;
+      width: 70%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      background-color: #FFFFFF;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      /* tùy chọn: thêm đổ bóng đẹp */
+      z-index: 1100;
+    }
+
+    .product_fixed_titile {
+      font-weight: 600;
+    }
+
+    .product_fixed_price {
+      font-size: 18px;
+      color: #D70018;
+      font-weight: bold;
+    }
+
+    s {
+      font-size: 14px;
+      color: #ccc;
+      margin: 15px 0 0 15px;
+
+    }
+
+    .product_fixed button {
+      width: 100px;
+      padding: 10px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .product_fixed_tg:hover {
+      background-color: #f8f8f8;
+    }
+
+    .product_fixed_tg {
+      border-color: #3B82F6;
+      color: #3B82F6;
+      background-color: #FFFFFF;
+    }
+
+    .product_fixed_mng {
+      background-color: #D70018;
+      border-color: #D70018;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="product">
+    <div class="product-detail">
+      <div class="product-detail__main">
+        <h2 class="product-detail__title">Điện thoại iPhone 16 Pro Max 256GB</h2>
+        <div class="product-detail__rating">⭐ 4.9</div>
+        <div class="product-detail__actions">
+          <ul class="product-actions__list">
+            <li class="product-actions__item"><i class="bx bx-heart"></i> Yêu thích</li>
+            <li class="product-actions__item"><i class="bx bx-message-dots"></i> Hỏi đáp</li>
+            <li class="product-actions__item"><i class="bx bx-chip"></i> Thông số</li>
+            <li class="product-actions__item"><i class="bx bx-plus-circle"></i> So sánh</li>
+          </ul>
+        </div>
+
+        <div class="product-detail__overview">
+          <div class="product-overview__image">
+            <img
+              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-pro-max.png"
+              alt="">
+          </div>
+
+          <div class="product-overview__features">
+            <h2 class="features__title">TÍNH NĂNG NỔI BẬT</h2>
+            <p class="features__text">
+              Thiết kế bằng chất liệu titan: nhẹ và bền.<br>
+              Màn hình Super Retina XDR 6.9 inch: kích thước lớn, hiển thị sắc nét.<br>
+              Tính năng Camera Control: truy cập nhanh các công cụ như thu phóng.<br>
+              Camera Ultra Wide 48MP: chụp ảnh chi tiết, rõ nét.<br>
+              Camera Telephoto: hỗ trợ zoom quang học 5x.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="product-detaill">
+        <div class="product-detail__price">
+          <div class="price__item">
+            <div class="price__label">Giá sản phẩm</div>
+            <div class="price__value">30.590.000đ</div>
+          </div>
+
+          <div class="price__item">
+            <div class="price__label">Thu cũ lên đời chỉ từ</div>
+            <div class="price__value">28.590.000đ</div>
+          </div>
+        </div>
+
+        <div class="product-detail__version">
+          <h2 class="version__title">Phiên bản</h2>
+          <ul class="version__list">
+            <li class="version__item">1TB</li>
+            <li class="version__item">512GB</li>
+            <li class="version__item">256GB</li>
+          </ul>
+        </div>
+
+        <div class="product-detail__color">
+          <h2 class="color__title">Màu sắc</h2>
+          <ul class="color__list">
+            <li class="color__item">
+              <img
+                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:50:50/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-pro-max-titan-tu-nhien.png"
+                alt="">
+              <div class="color__itemmm">
+                <div class="color__name">Titan Tự Nhiên</div>
+                <div class="color__price">30.790.000đ</div>
+              </div>
+
+            </li>
+            <li class="color__item">
+              <img
+                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:50:50/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-pro-max-titan-den.png"
+                alt="">
+              <div class="color__itemmm">
+                <div class="color__name">Titan Đen</div>
+                <div class="color__price">30.790.000đ</div>
+              </div>
+
+            </li>
+            <li class="color__item">
+              <img
+                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:50:50/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-pro-max-titan-trang.png"
+                alt="">
+              <div class="color__itemmm">
+                <div class="color__name">Titan Trắng</div>
+                <div class="color__price">30.790.000đ</div>
+              </div>
+
+            </li>
+            <li class="color__item">
+              <img
+                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:50:50/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-pro-max-titan-sa-mac.png"
+                alt="">
+              <div class="color__itemmm">
+                <div class="color__name">Titan Sa Mạc</div>
+                <div class="color__price">30.590.000đ</div>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="product_fixed">
+      <img
+        src="https://cdn2.cellphones.com.vn/insecure/rs:fill:56:56/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-pro-max-titan-sa-mac.png"
+        alt="">
+      <div class="product_fixed_titile">iPhone 16 Pro Max 256GB | Chính hãng VN/A-Titan Sa...</div>
+      <div>
+        <div class="product_fixed_price">30.000.000đ</div>
+        <s>32.000.000đ</s>
+      </div>
+
+      <button class="product_fixed_tg">Trả góp 0%</button>
+      <button class="product_fixed_mng">Mua ngay</button>
+    </div>
+  </div>
+</body>
+
+</html>

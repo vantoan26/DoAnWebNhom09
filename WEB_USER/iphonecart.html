@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Inter, Roboto, sans-serif;
+    background-color: rgb(227, 227, 227);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header {
+    width: 100%;
+    display: flex;
+    padding: 30px 0;
+    justify-content: center;
+    gap: 40px;
+    background: linear-gradient(150deg, #22aa9e61, #2370c9b9);
+    white-space: nowrap;
+    color: #fff;
+  }
+
+  .header_logo {
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+  }
+
+  .header_list,
+  .header_location,
+  .header_cart,
+  .header_login {
+    border-radius: 5px;
+    background-color: rgba(247, 246, 246, 0.3);
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .header_location {
+    position: relative;
+  }
+
+
+  .header_search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    background-color: rgba(247, 246, 246, 0.3);
+    padding: 5px 10px;
+    width: 300px;
+    color: #000;
+  }
+
+  .header_search input {
+    flex: 1;
+    /* chiếm hết phần còn lại */
+    border: none;
+    padding: 8px 10px;
+    background-color: transparent;
+    outline: none;
+    font-size: 16px;
+  }
+
+  .header_list:hover,
+  .header_location:hover,
+  .header_cart:hover,
+  .header_login:hover {
+    background-color: #4b4b0b;
+  }
+
+  i {
+    font-size: 20px;
+    color: black;
+  }
+
+  .header_list_menu {
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    background-color: #fff;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    display: none;
+    z-index: 1000;
+  }
+
+  .header_list_menu ul {
+    list-style: none;
+  }
+
+  .header_list_menu li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 19px;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .header_list_menu li:hover {
+    background-color: #eee;
+    color: #666633;
+  }
+
+  .header_login_register {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 15px 20px;
+    display: none;
+    height: 200px;
+    width: 320px;
+    z-index: 1001;
+  }
+
+  .header_login_register_title {
+    text-align: center;
+    font-size: 25px;
+    color: #666633;
+    font-weight: 600;
+  }
+
+  .header_login_register_message {
+    font-size: 18px;
+    text-align: center;
+    margin: 20px 0 0 0;
+  }
+
+  .header_login_register_action {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 45px 0 0 0;
+  }
+
+  .header_login_register_re,
+  .header_login_register_log {
+    border: 3px solid #7f7f3f;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .header_login_register_re a,
+  .header_login_register_log a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .header_login_register_log {
+    background-color: #7f7f3f;
+    color: #fff;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+
+  }
+
+  /* location */
+  .city-selector {
+    position: absolute;
+    top: 30%;
+    /* hoặc điều chỉnh theo vị trí header */
+    left: 30%;
+    background: #ffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 999;
+    display: none;
+    width: 500px;
+
+  }
+
+  .search-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 5px;
+  }
+
+  .search-box input {
+    flex: 1;
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .search-box button {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.3s;
+  }
+
+  .search-box button:hover {
+    background: #c0392b;
+  }
+
+  .city-list {
+    max-height: 200px;
+    overflow-y: scroll;
+    border-top: 1px solid #eee;
+  }
+
+  .city-item {
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  .city-item:hover {
+    background-color: #f5f5f5;
+  }
+
+  .city-item.selected {
+    color: #e74c3c;
+    font-weight: bold;
+    background-color: #fdecea;
+  }
+
+
+
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    position: relative;
+    background: white;
+    width: 90%;
+    min-width: 500px;
+    border-radius: 16px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+  }
+
+  #modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #555;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--brand-gray-light);
+  }
+
+  .modal-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .modal-close {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  .modal-close:hover {
+    background: #f5f5f5;
+  }
+
+  .modal-body {
+    padding: 20px;
+    min-height: 400px;
+    overflow-y: auto;
+  }
+
+  .empty-cart {
+    text-align: center;
+    color: #222;
+    padding: 40px 20px;
+  }
+
+  .modal-footer {
+    padding: 20px;
+    border-top: 1px solid var(--brand-gray-light);
+  }
+
+  .cart-total {
+    margin-bottom: 16px;
+    text-align: right;
+    font-size: 1.125rem;
+  }
+
+  .btn-checkout {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  .container_page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pagenumber ul {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+    justify-content: center;
+    padding: 0;
+    margin: 10px 0;
+  }
+
+  .pagenumber li {
+    padding: 5px 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .pagenumber li:hover {
+    background-color: #f0f0f0;
+  }
+
+  .cart_location_pay {
+    width: 100%;
+  }
+
+  .cart_section {
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .cart-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #222;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+  }
+
+  .cart-address-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .cart-address-options label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .cart-address-options input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #6366f1;
+  }
+
+  .cart-new-address {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .cart-new-address input {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .cart-new-address input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+  }
+
+  .cart-payment {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    outline: none;
+  }
+
+  .cart-payment:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+  }
+
+  .body_cart {
+    width: 90%;
+  }
+
+  .card_wrap {
+    width: 100%;
+    padding: 10px;
+    margin-left: auto;
+    margin-top: 20px;
+    border-radius: 10px;
+  }
+
+  .card_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+  }
+
+  .card {
+    max-width: 180px;
+    min-width: 150px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1200;
+  }
+
+  .card a {
+    text-decoration: none;
+  }
+
+  .card_img img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .card_img img:hover {
+    transform: scale(1.02);
+    transition: all 0.5s ease;
+  }
+
+  .card_info {
+    margin-top: 8px;
+  }
+
+  .card_name {
+    font-weight: bold;
+    width: 100%;
+    font-size: 16px;
+    margin: 10px 0;
+    color: black;
+    word-wrap: break-word;
+  }
+
+  .card_new {
+    background-color: #dff9e8;
+    color: #60896f;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 4px 0;
+    font-size: 10px;
+  }
+
+  .crad_price {
+    color: #d03345;
+    font-size: 16px;
+    font-weight: bolder;
+    word-wrap: break-word;
+  }
+
+  .card_price_old {
+    color: #ccc;
+    font-size: 14px;
+
+  }
+
+  .crad_sale {
+    background-color: #dbe8fe;
+    color: #5072a8;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 5px;
+    word-wrap: break-word;
+  }
+
+  .crad_student {
+    background-color: #efe9fe;
+    color: #a997d6;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 5px;
+    margin: 10px 0;
+  }
+
+  .card_evaluate {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+  }
+
+  .crad_rating {
+    font-weight: bold;
+    color: black;
+  }
+
+  .card_like i {
+    color: #98bbf7;
+  }
+
+  .card_like {
+    color: #7AAAF9;
+    display: flex;
+    align-items: center;
+  }
+
+  .cart_btn {
+    display: flex;
+    justify-content: center;
+    margin: 7px 0 0 0;
+
+  }
+
+  .cart_btn button {
+    padding: 5px 5%;
+    border-radius: 5px;
+    background-color: #d03345;
+    color: #fff;
+  }
+
+  .cart_btn button:hover {
+    cursor: pointer;
+    background-color: #d0cfcf;
+  }
+
+  .filter__title {
+    font-size: 20px;
+    font-weight: bolder;
+    margin: 10px 15px;
+  }
+
+  .filter__list {
+    display: flex;
+    list-style: none;
+    border-radius: 5px;
+    flex-wrap: wrap;
+    margin: 0 10px;
+    gap: 10px;
+  }
+
+  .filter__item {
+    border-radius: 10px;
+    font-size: 16px;
+    background: rgba(247, 246, 246, 0.3);
+    padding: 10px 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  .filter__item:hover {
+    background-color: rgba(110, 106, 106, 0.3);
+    cursor: pointer;
+  }
+
+  .sort {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 10px 0;
+  }
+
+  .sort__header {
+    font-size: 20px;
+    font-weight: bolder;
+  }
+
+  .sort__list {
+    font-size: 16px;
+    display: flex;
+    list-style: none;
+    gap: 10px;
+
+  }
+
+  .sort__item {
+    border-radius: 50px;
+    background-color: rgba(247, 246, 246, 0.3);
+    padding: 10px 8px;
+  }
+
+  .sort__item:hover {
+    cursor: pointer;
+    background-color: rgba(110, 106, 106, 0.3);
+  }
+
+  .product {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .product_container {
+    width: 80%;
+
+  }
+
+  .product_img {
+    width: 35%;
+    height: auto;
+  }
+
+  .product_img img {
+    width: 1005;
+  }
+
+
+  .product__content {
+    width: 100%;
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+  }
+
+  .product__list {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+    margin: 0;
+    padding: 10px 0;
+    justify-content: center;
+  }
+
+  .product__item {
+    border: 1px solid black;
+    background-color: rgba(247, 246, 246, 0.3);
+    border-radius: 5px;
+    padding: 5px 0;
+  }
+
+  .product__item:hover {
+    cursor: pointer;
+  }
+
+  .product__description {
+    font-size: 16px;
+    margin: 8px 0;
+    overflow: hidden;
+  }
+
+  h3 {
+    margin: 30px 0 0 0;
+  }
+
+  .product-category {
+    font-weight: bolder;
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .product-category__list {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .product-category__item {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 7px 10px;
+  }
+
+  .img_img {
+    width: 90%;
+  }
+
+  .banner_iphone {
+    margin: 20px 0 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    /* Ẩn phần thừa nếu quá dài */
+    text-overflow: ellipsis;
+  }
+
+  .banner_iphone img {
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 0px rgba(225, 224, 224, 0.5);
+    z-index: 1000;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    body {
+      background-color: rgb(227, 227, 227);
+    }
+
+    .card {
+      flex: 0 0 45%;
+    }
+
+    .product {
+      width: 100%;
+    }
+
+    .img_img {
+      width: 100%;
+    }
+
+    .filter__list {
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .filter__item {
+      flex: 0 0 45%;
+      justify-content: center;
+    }
+
+    .header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .header_location,
+    .header_login {
+      display: none;
+    }
+
+    .banner_iphone2 {
+      display: none;
+    }
+
+
+  }
+
+  @media only screen and (max-width: 800px) {
+    body {
+      background-color: rgb(227, 227, 227);
+    }
+
+    .sort {
+      width: 100%;
+    }
+
+    .sort__header {
+      display: none;
+    }
+
+    .sort__list {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid black;
+    }
+
+    .sort__item {
+      margin: 10px 0 0 0;
+      border-right: 1px solid black;
+      border-radius: 0;
+      background-color: none;
+      font-size: 18px;
+    }
+
+    .product__list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+</style>
+
+<body>
+  <div class="header">
+    <div class="header_logo">LOGO</div>
+    <div class="header_list">
+      <i class='bxr  bx-list-ul'></i>
+      Danh mục
+      <i class='bxr  bx-chevron-down'></i>
+    </div>
+    <div class="header_location">
+      <i class='bxr  bx-location-alt'></i>
+      Địa chỉ
+      <i class='bxr  bx-chevron-down'></i>
+    </div>
+    <div class="header_search">
+      <i class='bxr  bx-search'> </i>
+      <input type="search" placeholder="Bạn muốn mua gì?">
+    </div>
+    <div class="header_cart">
+      Giỏ hàng
+      <i class='bxr  bx-cart'></i>
+    </div>
+    <div class="header_login">
+      Đăng nhập
+      <i class='bxr  bx-user'></i>
+    </div>
+  </div>
+  </div>
+
+
+  <!-- location -->
+  <div class="city-selector" id="citySelector">
+    <div class="search-box">
+      <input type="text" id="cityInput" placeholder="Nhập tên tỉnh thành">
+      <button id="closeBtn">Đóng ×</button>
+    </div>
+    <div class="city-list">
+      <ul class="city-list">
+        <li class="city-item selected">Hồ Chí Minh</li>
+        <li class="city-item">Hà Nội</li>
+        <li class="city-item">An Giang</li>
+        <li class="city-item">Bà Rịa - Vũng Tàu</li>
+        <li class="city-item">Bạc Liêu</li>
+        <li class="city-item">Bắc Giang</li>
+        <li class="city-item">Bắc Ninh</li>
+        <li class="city-item">Bến Tre</li>
+        <li class="city-item">Bình Dương</li>
+        <li class="city-item">Bình Định</li>
+        <li class="city-item">Cà Mau</li>
+        <li class="city-item">Cần Thơ</li>
+        <li class="city-item">Đà Nẵng</li>
+        <li class="city-item">Đắk Lắk</li>
+        <li class="city-item">Đắk Nông</li>
+        <li class="city-item">Điện Biên</li>
+        <li class="city-item">Gia Lai</li>
+        <li class="city-item">Hà Giang</li>
+        <li class="city-item">Hà Nam</li>
+        <li class="city-item">Hải Dương</li>
+        <li class="city-item">Hải Phòng</li>
+        <li class="city-item">Hậu Giang</li>
+        <li class="city-item">Hòa Bình</li>
+        <li class="city-item">Hưng Yên</li>
+        <li class="city-item">Khánh Hòa</li>
+        <li class="city-item">Kiên Giang</li>
+        <li class="city-item">Kon Tum</li>
+        <li class="city-item">Lai Châu</li>
+        <li class="city-item">Lâm Đồng</li>
+        <li class="city-item">Lạng Sơn</li>
+        <li class="city-item">Lào Cai</li>
+        <li class="city-item">Long An</li>
+        <li class="city-item">Nam Định</li>
+        <li class="city-item">Nghệ An</li>
+        <li class="city-item">Ninh Bình</li>
+        <li class="city-item">Ninh Thuận</li>
+        <li class="city-item">Phú Thọ</li>
+        <li class="city-item">Phú Yên</li>
+        <li class="city-item">Quảng Bình</li>
+        <li class="city-item">Quảng Nam</li>
+        <li class="city-item">Quảng Ngãi</li>
+        <li class="city-item">Quảng Ninh</li>
+        <li class="city-item">Quảng Trị</li>
+        <li class="city-item">Sóc Trăng</li>
+        <li class="city-item">Sơn La</li>
+        <li class="city-item">Tây Ninh</li>
+        <li class="city-item">Thái Bình</li>
+        <li class="city-item">Thái Nguyên</li>
+        <li class="city-item">Thanh Hóa</li>
+        <li class="city-item">Thừa Thiên Huế</li>
+        <li class="city-item">Tiền Giang</li>
+        <li class="city-item">Trà Vinh</li>
+        <li class="city-item">Tuyên Quang</li>
+        <li class="city-item">Vĩnh Long</li>
+        <li class="city-item">Vĩnh Phúc</li>
+        <li class="city-item">Yên Bái</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <div class="modal" id="cartModal">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h3>Giỏ hàng của bạn</h3>
+        <button class="modal-close" id="closeCartModal">&times;</button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <!-- Giỏ hàng -->
+        <div id="cartItems">
+          <p class="empty-cart">Giỏ hàng của bạn đang trống</p>
+        </div>
+
+        <!-- Form chọn địa chỉ -->
+        <div class="cart_location_pay">
+          <div class="cart_section">
+            <h3 class="cart-section-title">Địa chỉ giao hàng</h3>
+            <div class="cart-address-options">
+              <label>
+                <input type="radio" name="addressOption" value="account" checked> Sử dụng địa chỉ từ tài khoản
+              </label>
+              <label>
+                <input type="radio" name="addressOption" value="new"> Nhập địa chỉ mới
+              </label>
+            </div>
+            <div id="newAddressFields" class="cart-new-address">
+              <input type="text" id="recipientName" placeholder="Họ và tên">
+              <input type="text" id="recipientPhone" placeholder="Số điện thoại">
+              <input type="text" id="recipientAddress" placeholder="Địa chỉ">
+            </div>
+          </div>
+        </div>
+
+        <!-- Phương thức thanh toán -->
+        <div class="cart_section">
+          <h3 class="cart-section-title">Phương thức thanh toán</h3>
+          <select id="paymentMethod" class="cart-payment">
+            <option value="cod" selected>Tiền mặt khi nhận hàng</option>
+            <option value="bank">Chuyển khoản</option>
+            <option value="online">Thanh toán trực tuyến</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <div class="cart-total">
+          <strong>Tổng cộng: <span id="cartTotal">0₫</span></strong>
+        </div>
+        <button class="btn-primary btn-checkout" id="btn-primary">THANH TOÁN</button>
+      </div>
+    </div>
+  </div>
+  <!--menu danh sach-->
+  <div class="header_list_menu" id="header_list_menu">
+    <ul>
+      <li><a href="card.html">Apple</a> <i class='bxr  bx-chevron-right'></i> </li>
+      <li><a href="samsungcard.html">Samsung</a><i class='bxr  bx-chevron-right'></i> </li>
+      <li>Oppo <i class='bxr  bx-chevron-right'></i> </li>
+      <li>Xiaomi <i class='bxr  bx-chevron-right'></i> </li>
+      <li>Huawei <i class='bxr  bx-chevron-right'></i> </li>
+      <li>Vivo <i class='bxr  bx-chevron-right'></i> </li>
+      <li>Realme <i class='bxr  bx-chevron-right'></i> </li>
+    </ul>
+  </div>
+
+  <!--dang nhap-->
+  <div class="header_login_register" id="header_login_register">
+    <div class="header_login_register_title">LOGIN</div>
+    <div class="header_login_register_message">Vui lòng đăng nhập để xem thông tin !!!</div>
+    <div class="header_login_register_action">
+      <div class="header_login_register_re"><a href="login4.html">Đăng kí</a></div>
+      <div class="header_login_register_log"> <a href="login4.html">Đăng nhập</a></div>
+    </div>
+  </div>
+
+  <div class="banner_iphone">
+    <img class="banner_iphone1"
+      src="https://cdn2.cellphones.com.vn/insecure/rs:fill:595:100/q:100/plain/https://dashboard.cellphones.com.vn/storage/595x100_Cate_iPhone_Air_Opensale_v2.png"
+      alt="">
+    <img class="banner_iphone2"
+      src="https://cdn2.cellphones.com.vn/insecure/rs:fill:595:100/q:100/plain/https://dashboard.cellphones.com.vn/storage/595x100_iPhone_17_Pro_opensale_v3.png"
+      alt="">
+  </div>
+
+  <div class="product-category">
+    <h3 class="product-category__title">iPhone</h3>
+    <ul class="product-category__list">
+      <li class="product-category__item">IPHONE 17 SERIES</li>
+      <li class="product-category__item">IPHONE AIR</li>
+      <li class="product-category__item">IPHONE 16 SERIES</li>
+      <li class="product-category__item">IPHONE 15 SERIES</li>
+      <li class="product-category__item">IPHONE 14 SERIES</li>
+      <li class="product-category__item">IPHONE 13 SERIES</li>
+      <li class="product-category__item">IPHONE 12 SERIES</li>
+      <li class="product-category__item">IPHONE 11 SERIES</li>
+    </ul>
+  </div>
+  <div class="filter">
+    <div class="filter__title">Chọn theo tiêu chí</div>
+    <ul class="filter__list">
+      <li class="filter__item">
+        <i class='bxr  bx-filter'></i>
+        Bộ lọc
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+      <li class="filter__item">
+        <i class='bxr  bx-truck'></i>
+        Sẵn sàng
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+      <li class="filter__item">
+        <i class='bxr  bx-package'></i>
+        Hàng mới về
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+      <li class="filter__item">
+        <i class='bxr  bx-dollar-circle'></i>
+        Xem theo giá
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+      <li class="filter__item">
+        <i class='bxr  bx-sd-card'></i>
+        Bộ nhớ chung
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+      <li class="filter__item">
+        <i class='bxr  bx-sd-card'></i>
+        Dung lượng ram
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+      <li class="filter__item">
+        <i class='bxr  bx-expand-right'></i>
+        Kích thước màn hình
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+      <li class="filter__item">
+        Nhu cầu sử dụng
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+      <li class="filter__item">
+        Kiểu màn hình
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+      <li class="filter__item">
+        Tính năng camera
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+      <li class="filter__item">
+        Tần số quét
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+      <li class="filter__item">
+        Tính năng đặc biệt
+        <i class='bxr  bx-chevron-down'></i>
+      </li>
+    </ul>
+  </div>
+
+  <div class="sort">
+    <div class="sort__header">Sắp xếp theo</div>
+    <ul class="sort__list">
+      <li class="sort__item">
+        <i class='bxr  bx-star'></i> Phổ biến
+      </li>
+      <li class="sort__item">
+        <i class='bxr  bx-cog'></i> Khuyến mãi HOT
+      </li>
+      <li class="sort__item">
+        <i class='bx bx-sort-alt-2'></i>Giá thấp-cao
+      </li>
+      <li class="sort__item">
+        <i class='bx bx-sort-alt-2'></i> Giá cao-thấp
+      </li>
+    </ul>
+  </div>
+  <div class="body_cart">
+    <div class="card_wrap">
+      <div class="card_container">
+        <div class="card">
+          <div class="card_img"><img
+              src="https://www.mobiledokan.com/media/apple-iphone-17-air-blue-official-image.webp" alt=""></div>
+          <div class="card_info">
+            <div class="card_name">iPhone Air 256GB | Chính hãng</div>
+            <div class="card_new">Hàng mới về</div>
+            <div class="crad_price">31.990.000đ</div>
+            <div class="crad_sale">Smember giảm đến 320.000đ</div>
+            <div class="crad_student">s-Student giảm thêm 100.000đ</div>
+            <div class="card_evaluate">
+              <div class="crad_rating"> ⭐5</div>
+              <div class="card_like">
+                <i class='bx  bx-heart'></i>
+                Yêu thích
+              </div>
+            </div>
+            <div class="cart_btn">
+              <button>Thêm vào giỏ hàng</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card_img"><img
+              src="https://www.mobiledokan.com/media/apple-iphone-17-pro-max-white-official-image_1.webp" alt=""></div>
+          <div class="card_info">
+            <div class="card_name">iPhone 17 512G | Chính hãng</div>
+            <div class="card_new">Hàng mới về</div>
+            <div class="crad_price">40.490.000đ</div>
+            <div class="crad_sale">Smember giảm đến 320.000đ</div>
+            <div class="crad_student">s-Student giảm thêm 100.000đ</div>
+            <div class="card_evaluate">
+              <div class="crad_rating"> ⭐5</div>
+              <div class="card_like">
+                <i class='bx  bx-heart'></i>
+                Yêu thích
+              </div>
+            </div>
+            <div class="cart_btn">
+              <button>Thêm vào giỏ hàng</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card_img"><img
+              src="https://cdn2.cellphones.com.vn/x/media/catalog/product/i/p/iphone-16-pro-max.png" alt=""></div>
+          <div class="card_info">
+            <div class="card_name">iPhone 16 Pro Max 256GB | Chính hãng VN/A</div>
+            <div class="card_new">Hàng mới về</div>
+            <div class="crad_price">30.490.000đ</div>
+            <div class="crad_sale">Smember giảm đến 320.000đ</div>
+            <div class="crad_student">s-Student giảm thêm 100.000đ</div>
+            <div class="card_evaluate">
+              <div class="crad_rating"> ⭐4.9</div>
+              <div class="card_like">
+                <i class='bx  bx-heart'></i>
+                Yêu thích
+              </div>
+            </div>
+            <div class="cart_btn">
+              <button>Thêm vào giỏ hàng</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card_img"><img
+              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-17-pro-cam.jpg"
+              alt=""></div>
+          <div class="card_info">
+            <div class="card_name">iPhone 17 512G | Chính hãng</div>
+            <div class="card_new">Hàng mới về</div>
+            <div class="crad_price">40.890.000đ</div>
+            <div class="crad_sale">Smember giảm đến 320.000đ</div>
+            <div class="crad_student">s-Student giảm thêm 100.000đ</div>
+            <div class="card_evaluate">
+              <div class="crad_rating"> ⭐5</div>
+              <div class="card_like">
+                <i class='bx  bx-heart'></i>
+                Yêu thích
+              </div>
+            </div>
+            <div class="cart_btn">
+              <button>Thêm vào giỏ hàng</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card_img"><img
+              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-15-pro-256gb.png"
+              alt=""></div>
+          <div class="card_info">
+            <div class="card_name">iPhone 15 Pro Max 256GB | Chính hãng VN/A</div>
+            <div class="card_new">Hàng mới về</div>
+            <div class="crad_price">26.990.000đ</div>
+            <div class="crad_sale">Smember giảm đến 320.000đ</div>
+            <div class="crad_student">s-Student giảm thêm 100.000đ</div>
+            <div class="card_evaluate">
+              <div class="crad_rating"> ⭐5</div>
+              <div class="card_like">
+                <i class='bx  bx-heart'></i>
+                Yêu thích
+              </div>
+            </div>
+            <div class="cart_btn">
+              <button>Thêm vào giỏ hàng</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product">
+    <div class="product_container">
+      <div class="product__content">
+        <ul class="product__list">
+          <li class="product__item">iPhone 17</li>
+          <li class="product__item">iPhone 17 256GB</li>
+          <li class="product__item">iPhone 17 Pro</li>
+          <li class="product__item">iPhone 17 Pro Max</li>
+          <li class="product__item">iPhone Air</li>
+        </ul>
+        <p class="product__description">
+          <b>iPhone - Apple</b> là điện thoại cao cấp chạy trên <b>hệ điều hành iOS</b>, CPU hoàn thiện từ con chip
+          <b>Apple</b>
+          <b>Bionic, Apple A</b> do chính Apple phát triển. <b>Apple iPhone</b> sở hữu bộ nhớ lưu trữ đa dạng, với dung
+          lượng
+          chuẩn <b>64GB - 128GB</b> và nhiều phiên bản dung lượng nâng cấp khác như <b>256GB, 512GB, 1TB</b> cho người
+          dùng lựa chọn.
+          Điện thoại Apple thường được trang bị màn hình Retina chất lượng cùng với thiết kế tai thỏ, viên thuốc Dynamic
+          Island độc đáo và nhiều màu sắc ấn tượng như đen, đỏ, xanh, trắng, tím, hồng,...
+        </p>
+        <h3>iPhone của nước nào? Sản xuất tại đâu?</h3>
+        <p class="product__description">Điện thoại iPhone là sản phẩm biểu tượng của Apple Inc, tập đoàn công nghệ đa
+          quốc gia có trụ sở chính tại bang California, Hoa Kỳ. Thực tế, Apple không trực tiếp sản xuất thiết bị của
+          mình, mà vận hành theo mô hình gia công: thiết kế tại Mỹ và lắp ráp tại Trung Quốc. Điện thoại iPhone ra mắt
+          lần đầu năm 2007 và trở thành dòng smartphone được nhiều người săn đón.</p>
+        <img class="img_img"
+          src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:0/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Phone/Apple/dien-thoai-apple-10.jpg"
+          alt="">
+        <p class="product__description">Phần lớn các dòng iPhone hiện nay đều được lắp ráp tại nhà máy thuộc tập đoàn
+          Foxconn. Những khu tổ hợp như Thâm Quyến chính là nơi hàng triệu chiếc ip được lắp ráp mỗi năm. Tuy nhiên,
+          Apple vẫn kiểm soát chặt chẽ toàn bộ quy trình chất lượng, từ bảng mạch, chip xử lý cho đến các linh kiện như
+          màn hình, camera hay cảm biến. </p>
+        <img class="img_img"
+          src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:0/q:90/plain/https://cellphones.com.vn/media/wysiwyg/Phone/Apple/dien-thoai-apple-39.jpg"
+          alt="">
+        <p class="product__description">Ngoài ra, Apple cũng đã mở rộng chuỗi cung ứng của mình sang các quốc gia khác.
+          Từ năm 2022, các dòng iPhone đã bắt đầu được sản xuất tại Ấn Độ và xu hướng này tiếp tục tăng trưởng mạnh mẽ.
+          Qua mỗi thế hệ iP, hãng đã ngày càng cải tiến sản phẩm điện thoại của mình với những đặc điểm công nghệ hiện
+          đại, phù hợp nhu cầu thị trường trong từng giai đoạn.</p>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initMenuToggle();
+      initLoginToggle();
+      initLocationSelector();
+    });
+    // DANH MỤC 
+
+    function initMenuToggle() {
+      const headerList = document.querySelector('.header_list');
+      const headerListMenu = document.getElementById('header_list_menu');
+
+      document.addEventListener('click', (e) => {
+        if (headerListMenu && headerList) {
+          if (!headerList.contains(e.target) && !headerListMenu.contains(e.target)) {
+            headerListMenu.style.display = 'none';
+          }
+        }
+      });
+
+      if (headerList && headerListMenu) {
+        headerList.addEventListener('click', (e) => {
+          e.stopPropagation();
+          headerListMenu.style.display =
+            headerListMenu.style.display === 'block' ? 'none' : 'block';
+        });
+      }
+    }
+
+
+    //  ĐĂNG NHẬP
+    function initLoginToggle() {
+      const headerlogin = document.querySelector('.header_login');
+      const categoryLoginRe = document.getElementById('header_login_register');
+
+      document.addEventListener('click', (e) => {
+        if (categoryLoginRe && headerlogin) {
+          if (!headerlogin.contains(e.target) && !categoryLoginRe.contains(e.target)) {
+            categoryLoginRe.style.display = 'none';
+          }
+        }
+      });
+
+      if (headerlogin && categoryLoginRe) {
+        headerlogin.addEventListener('click', (e) => {
+          e.stopPropagation();
+          categoryLoginRe.style.display =
+            categoryLoginRe.style.display === 'block' ? 'none' : 'block';
+        });
+      }
+    }
+
+
+    // LOCATION
+    function initLocationSelector() {
+      const headerLocation = document.querySelector('.header_location');
+      const citySelector = document.getElementById('citySelector');
+      const closeBtn = document.getElementById('closeBtn');
+      const cityItems = document.querySelectorAll('.city-item');
+      const cityInput = document.getElementById('cityInput');
+
+      if (!headerLocation || !citySelector) return;
+
+      // Hiển thị dropdown khi click vào "Địa chỉ"
+      headerLocation.addEventListener('click', (e) => {
+        e.stopPropagation();
+        citySelector.style.display =
+          citySelector.style.display === 'block' ? 'none' : 'block';
+      });
+
+      // Click ra ngoài sẽ đóng dropdown
+      document.addEventListener('click', (e) => {
+        if (!citySelector.contains(e.target) && !headerLocation.contains(e.target)) {
+          citySelector.style.display = 'none';
+        }
+      });
+
+      // Nút đóng dropdown
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          citySelector.style.display = 'none';
+        });
+      }
+
+      // Chọn thành phố
+      cityItems.forEach((item) => {
+        item.addEventListener('click', () => {
+          cityItems.forEach((i) => i.classList.remove('selected'));
+          item.classList.add('selected');
+          headerLocation.innerHTML = `<i class='bxr bx-location-alt'></i> ${item.textContent} <i class='bxr bx-chevron-down'></i>`;
+          citySelector.style.display = 'none';
+        });
+      });
+
+      // Lọc thành phố theo input
+      if (cityInput) {
+        cityInput.addEventListener('input', () => {
+          const filter = cityInput.value.toLowerCase();
+          cityItems.forEach((item) => {
+            item.style.display = item.textContent.toLowerCase().includes(filter)
+              ? 'block'
+              : 'none';
+          });
+        });
+      }
+    }
+
+
+
+    // gio hang
+    function initCartFeature() {
+      const cartCount = document.getElementById('cartCount');
+      const headerCart = document.querySelector('.header_cart');
+      const cartModal = document.getElementById('cartModal');
+      const closeCartModal = document.getElementById('closeCartModal');
+      const cartItemsContainer = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+      const closeButtonFooter = document.getElementById('modal-close-btn');
+      const btnPrimary = document.querySelector('.btn-primary');
+
+      const newAddressFields = document.getElementById('newAddressFields');
+      const addressRadios = document.querySelectorAll('input[name="addressOption"]');
+      const recipientName = document.getElementById('recipientName');
+      const recipientPhone = document.getElementById('recipientPhone');
+      const recipientAddress = document.getElementById('recipientAddress');
+
+      let cart = [];
+
+      // Nút "Thêm vào giỏ"
+      const addToCartButtons = document.querySelectorAll('.cart_btn button');
+      addToCartButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.card');
+          const name = card.querySelector('.card_name').innerText;
+          const priceText = card.querySelector('.crad_price').innerText;
+          const imgSrc = card.querySelector('.card_img img').src;
+          const price = Number(priceText.replace(/\D/g, ''));
+          cart.push({ name, price, imgSrc });
+          updateCartUI();
+        });
+      });
+
+      // Cập nhật giao diện giỏ hàng
+      function updateCartUI() {
+        if (!cartCount || !cartItemsContainer || !cartTotal) return;
+        cartCount.innerText = cart.length;
+
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = `<p class="empty-cart">Giỏ hàng của bạn đang trống</p>`;
+          cartTotal.innerText = "0₫";
+          return;
+        }
+
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+
+        cart.forEach((item, idx) => {
+          total += item.price;
+          const div = document.createElement('div');
+          div.classList.add('cart-item');
+          div.style.display = 'flex';
+          div.style.justifyContent = 'space-between';
+          div.style.alignItems = 'center';
+          div.style.marginBottom = '10px';
+
+          div.innerHTML = `
+        <div style="display:flex; gap:10px; align-items:center;">
+          <img src="${item.imgSrc}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;">
+          <span>${item.name}</span>
+        </div>
+        <div>
+          <span>${item.price.toLocaleString()}₫</span>
+          <button data-index="${idx}" 
+            style="margin-left:10px; padding:2px 5px; border:none; 
+                   background:black; color:#fff; border-radius:4px; cursor:pointer;">
+            Xóa
+          </button>
+        </div>
+      `;
+          cartItemsContainer.appendChild(div);
+        });
+
+        cartTotal.innerText = total.toLocaleString() + "₫";
+
+        // Xử lý nút xóa
+        const deleteButtons = cartItemsContainer.querySelectorAll('button');
+        deleteButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const index = btn.getAttribute('data-index');
+            cart.splice(index, 1);
+            updateCartUI();
+          });
+        });
+      }
+
+      // Hiển thị / ẩn modal giỏ hàng
+      if (headerCart && cartModal) {
+        headerCart.addEventListener('click', () => {
+          cartModal.classList.add('show');
+        });
+
+        cartModal.addEventListener('click', (e) => {
+          if (e.target === cartModal) {
+            cartModal.classList.remove('show');
+          }
+        });
+
+        if (closeCartModal) {
+          closeCartModal.addEventListener('click', () => {
+            cartModal.classList.remove('show');
+          });
+        }
+
+        if (closeButtonFooter) {
+          closeButtonFooter.addEventListener('click', () => {
+            cartModal.classList.remove('show');
+          });
+        }
+      }
+
+      // Hiển thị form nhập địa chỉ khi chọn "new"
+      addressRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+          if (radio.value === 'new' && radio.checked) {
+            newAddressFields.style.display = 'flex';
+          } else {
+            newAddressFields.style.display = 'none';
+          }
+        });
+      });
+
+      // Nút THANH TOÁN
+      if (btnPrimary) {
+        btnPrimary.addEventListener('click', () => {
+          if (cart.length === 0) {
+            alert("Giỏ hàng đang trống!");
+            return;
+          }
+
+          let selectedOption = document.querySelector('input[name="addressOption"]:checked').value;
+
+          if (selectedOption === 'account') {
+            alert("Bạn đã chọn địa chỉ từ tài khoản. Tiến hành thanh toán...");
+          } else {
+            if (!recipientName.value.trim() || !recipientPhone.value.trim() || !recipientAddress.value.trim()) {
+              alert("Vui lòng điền đầy đủ thông tin địa chỉ mới!");
+              return;
+            }
+            alert(`Thanh toán thành công!\nHọ tên: ${recipientName.value}\nSĐT: ${recipientPhone.value}\nĐịa chỉ: ${recipientAddress.value}`);
+          }
+
+          // Xóa giỏ hàng sau khi thanh toán
+          cart = [];
+          updateCartUI();
+          cartModal.classList.remove('show');
+        });
+      }
+    }
+
+  </script>
+</body>
+
+</html>
