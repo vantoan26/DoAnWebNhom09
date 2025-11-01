@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mua sản phẩm</title>
+  <link rel="stylesheet" href="Quanlysanpham.css" />
+</head>
+<body>
+  <header>
+    <h1> Cửa hàng điện thoại</h1>
+  </header>
+
+  <main>
+    <section id="product-list">
+      <h2>Danh sách sản phẩm</h2>
+      <div class="product">
+        <img src="https://via.placeholder.com/120" alt="iPhone 15" />
+        <h3>iPhone 15</h3>
+        <p>Giá: 28,000,000đ</p>
+        <button onclick="addToCart('iPhone 15', 28000000)">Thêm vào giỏ</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/120" alt="Samsung S24" />
+        <h3>Samsung S24</h3>
+        <p>Giá: 25,000,000đ</p>
+        <button onclick="addToCart('Samsung S24', 25000000)">Thêm vào giỏ</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/120" alt="Xiaomi 14" />
+        <h3>Xiaomi 14</h3>
+        <p>Giá: 15,000,000đ</p>
+        <button onclick="addToCart('Xiaomi 14', 15000000)">Thêm vào giỏ</button>
+      </div>
+    </section>
+
+    <section id="cart">
+      <h2>Giỏ hàng</h2>
+      <ul id="cart-items"></ul>
+      <p id="total">Tổng tiền: 0đ</p>
+      <button onclick="showCheckout()">Thanh toán</button>
+    </section>
+
+    <section id="checkout" class="hidden">
+      <h2>Thông tin thanh toán</h2>
+      <label>Địa chỉ giao hàng:</label><br />
+      <select id="address">
+        <option value="saved">Sử dụng địa chỉ trong tài khoản</option>
+        <option value="new">Nhập địa chỉ mới</option>
+      </select><br />
+      <input type="text" id="newAddress" placeholder="Nhập địa chỉ mới..." class="hidden" /><br /><br />
+
+      <label>Phương thức thanh toán:</label><br />
+      <select id="payment">
+        <option value="cash">Tiền mặt khi nhận hàng</option>
+        <option value="bank">Chuyển khoản ngân hàng</option>
+        <option value="online">Thanh toán trực tuyến</option>
+      </select><br /><br />
+
+      <button onclick="confirmOrder()">Xác nhận đặt hàng</button>
+    </section>
+
+    <section id="order-summary" class="hidden">
+      <h2>Đơn hàng của bạn</h2>
+      <div id="summary-content"></div>
+    </section>
+  </main>
+
+  <script src="Quanlysanpham.js"></script>
+</body>
+</html>
 
