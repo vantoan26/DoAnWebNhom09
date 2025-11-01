@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Bán Điện Thoại</title>
+  <link rel="stylesheet" href="donhangvatonkho.css">
+</head>
+<body>
+
+  <header>
+    <h1>📱 Hệ Thống Quản Lý Bán Điện Thoại</h1>
+    <nav>
+      <button onclick="showSection('orders')">Đơn hàng</button>
+      <button onclick="showSection('inventory')">Tồn kho</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- QUẢN LÝ ĐƠN HÀNG -->
+    <section id="orders" class="active">
+      <h2>Quản lý đơn đặt hàng</h2>
+      <div class="filter">
+        <label>Từ ngày: <input type="date" id="fromDate"></label>
+        <label>Đến ngày: <input type="date" id="toDate"></label>
+        <label>Tình trạng:
+          <select id="statusFilter">
+            <option value="">Tất cả</option>
+            <option value="new">Mới đặt</option>
+            <option value="processed">Đã xử lý</option>
+            <option value="delivered">Đã giao</option>
+            <option value="cancel">Hủy</option>
+          </select>
+        </label>
+        <button onclick="filterOrders()">Lọc</button>
+      </div>
+
+      <table id="orderTable">
+        <thead>
+          <tr>
+            <th>Mã đơn</th><th>Khách hàng</th><th>Ngày đặt</th>
+            <th>Tình trạng</th><th>Tổng tiền</th><th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- QUẢN LÝ TỒN KHO -->
+    <section id="inventory">
+      <h2>Quản lý tồn kho</h2>
+      <div class="filter">
+        <label>Tìm sản phẩm: <input type="text" id="searchProduct" placeholder="Nhập tên hoặc mã..."></label>
+        <label>Loại:
+          <select id="categoryFilter">
+            <option value="">Tất cả</option>
+            <option value="Apple">Apple</option>
+            <option value="Samsung">Samsung</option>
+            <option value="Xiaomi">Xiaomi</option>
+            <option value="OPPO">OPPO</option>
+          </select>
+        </label>
+        <button onclick="searchInventory()">Tìm</button>
+      </div>
+
+      <div class="actions">
+        <button onclick="importProduct()">📦 Nhập hàng</button>
+        <button onclick="exportProduct()">💸 Xuất hàng</button>
+      </div>
+
+      <table id="inventoryTable">
+        <thead>
+          <tr>
+            <th>Mã SP</th><th>Tên SP</th><th>Loại</th>
+            <th>Giá</th><th>Số lượng tồn</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div id="lowStockAlert"></div>
+    </section>
+  </main>
+
+  <script src="donhangvatonkho.js"></script>
+</body>
+</html>

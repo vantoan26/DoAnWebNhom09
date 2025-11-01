@@ -1,0 +1,73 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f3faff;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+header {
+  background: #0284c7;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+nav button {
+  margin: 5px;
+  padding: 8px 12px;
+  background: #0ea5a9;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+section {
+  display: none;
+  padding: 20px;
+  background: white;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ddd;
+}
+
+section.active {
+  display: block;
+}
+
+.filter {
+  margin-bottom: 10px;
+}
+
+.actions {
+  margin-bottom: 15px;
+}
+
+button {
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+.low-stock {
+  background-color: #fff3cd;
+}
+
+#lowStockAlert {
+  margin-top: 15px;
+  color: red;
+  font-weight: bold;
+}
